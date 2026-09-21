@@ -1,0 +1,367 @@
+/* ===========================================================================
+   Análisis · Insights
+   Hoja compartida por el índice y por todos los artículos.
+
+   Por qué esta sección vive fuera del archivo único: un artículo tiene que
+   tener URL propia. Alguien que llega buscando «bulk Malbec UK duty» aterriza
+   directamente en la nota, la comparte por correo y Google la indexa. Dentro
+   del archivo único sería una ruta con almohadilla adentro de 21 MB: no se
+   comparte, no se indexa y obliga a bajar todo el sitio para leer una página.
+
+   El sistema tipográfico y la paleta son los mismos del sitio. Las fuentes van
+   como archivos y no en base64 porque acá son ocho páginas y el navegador las
+   cachea una sola vez para todas.
+   =========================================================================== */
+
+@font-face{font-family:"Fabiola Capitals";src:url("fuentes/fabiola-capitals.otf") format("opentype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"Quasimoda";src:url("fuentes/quasimoda-light.otf") format("opentype");font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:"Quasimoda";src:url("fuentes/quasimoda-light-italic.otf") format("opentype");font-weight:300;font-style:italic;font-display:swap;}
+@font-face{font-family:"Quasimoda";src:url("fuentes/quasimoda-medium.otf") format("opentype");font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:"Quasimoda";src:url("fuentes/quasimoda-semibold.otf") format("opentype");font-weight:600;font-style:normal;font-display:swap;}
+@font-face{font-family:"Blair ITC Std";src:url("fuentes/blair-light.otf") format("opentype");font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:"Blair ITC Std";src:url("fuentes/blair-book.otf") format("opentype");font-weight:400;font-style:normal;font-display:swap;}
+
+:root{
+  --stone:#e3dfdd;
+  --taupe:#867a70;
+  --bordeaux:#49252f;
+  --claret:#4f232f;
+  --ink:#101211;
+  --charcoal:#242725;
+  --paper:#ffffff;
+  --mist:#e2dfdd;
+
+  /* Tono propio de esta sección.
+
+     El cuerpo del sitio es taupe (#867a70), que sobre blanco da 3,8:1 de
+     contraste. Para los párrafos cortos de las diez páginas funciona; para un
+     artículo de cuatro mil palabras no: queda por debajo del mínimo de
+     accesibilidad para texto corrido y cansa a la media página. Acá el cuerpo
+     va en un tono cálido oscuro (10:1) y el taupe queda para lo secundario:
+     volantas, epígrafes y notas al pie. Es la única desviación deliberada
+     respecto del sistema del sitio, y es por legibilidad. */
+  --lectura:#3b3531;
+  --linea:rgba(134,122,112,.28);
+
+  --font-display:"Fabiola Capitals","Times New Roman",serif;
+  --font-eyebrow:"Blair ITC Std",Georgia,"Times New Roman",serif;
+  --font-body:"Quasimoda","Helvetica Neue",Arial,sans-serif;
+
+  --gutter:clamp(1.4rem,5vw,6rem);
+  --medida:34rem;            /* la medida de lectura, ~68 caracteres */
+}
+
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;background:var(--paper);color:var(--lectura);
+  font-family:var(--font-body);font-weight:300;
+  font-size:clamp(1.02rem,.3vw + .95rem,1.16rem);
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;}
+a{color:inherit;}
+:focus-visible{outline:2px solid var(--bordeaux);outline-offset:3px;}
+
+/* ---------- cabecera · la misma del sitio, con enlaces reales -------------
+   En el archivo único la navegación la resuelve JavaScript con data-go. Acá
+   son páginas de verdad, así que son href y funcionan sin JavaScript. */
+.site-header{
+  position:relative;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:clamp(1rem,3vw,3rem);
+  padding:clamp(1rem,1.6vw,1.7rem) var(--gutter);
+  background:var(--paper);border-bottom:1px solid var(--linea);
+}
+.brand{display:flex;align-items:center;color:var(--taupe);}
+.brand__logo{display:block;width:clamp(112px,9.4vw,152px);height:auto;fill:currentColor;}
+.site-nav{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(.5rem,1.15vw,1.45rem);}
+.site-nav a{
+  font-family:var(--font-eyebrow);font-weight:400;
+  font-size:clamp(.635rem,.44vw + .245rem,.76rem);
+  text-transform:uppercase;letter-spacing:clamp(.032em,.085vw - .03em,.085em);
+  color:var(--taupe);white-space:nowrap;text-decoration:none;
+  padding-bottom:2px;border-bottom:1px solid transparent;
+}
+.site-nav a:hover,.site-nav a[aria-current="page"]{border-bottom-color:var(--bordeaux);}
+.langs{
+  display:inline-flex;align-items:center;gap:.45rem;
+  margin-left:clamp(.1rem,.9vw,.8rem);
+  font-family:var(--font-eyebrow);
+  font-size:clamp(.635rem,.44vw + .245rem,.76rem);
+  text-transform:uppercase;letter-spacing:.085em;color:var(--taupe);white-space:nowrap;
+}
+.langs__on{font-weight:600;color:var(--claret);}
+.langs__sep{opacity:.45;}
+.langs__alt{opacity:.66;text-decoration:none;}
+.langs__alt:hover{opacity:1;}
+.nav-toggle{display:none;}
+
+@media (max-width:1239px){
+  .site-header{flex-wrap:wrap;}
+  .site-nav{
+    display:none;width:100%;flex-direction:column;align-items:flex-start;gap:0;
+    padding-top:.6rem;
+  }
+  .site-nav[data-open="true"]{display:flex;}
+  .site-nav a{padding:.75rem 0;font-size:.95rem;}
+  .langs{padding:.9rem 0 0;margin-left:0;}
+  .nav-toggle{
+    display:inline-flex;align-items:center;gap:.6rem;background:none;border:0;cursor:pointer;
+    font:inherit;color:var(--taupe);font-family:var(--font-eyebrow);font-size:.8rem;
+    text-transform:uppercase;letter-spacing:.11em;
+  }
+}
+
+/* ---------- rastro de migas ---------- */
+.migas{
+  padding:clamp(1rem,1.6vw,1.5rem) var(--gutter);
+  border-bottom:1px solid var(--linea);
+  font-family:var(--font-eyebrow);font-size:clamp(.62rem,.3vw + .55rem,.72rem);
+  text-transform:uppercase;letter-spacing:.15em;color:var(--taupe);
+}
+.migas a{text-decoration:none;display:inline-flex;align-items:center;gap:.55rem;}
+.migas a:hover{color:var(--bordeaux);}
+.migas svg{width:17px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5;transform:scaleX(-1);}
+
+/* ---------- la columna del artículo ---------- */
+.envoltura{padding:0 var(--gutter);}
+.articulo{max-width:var(--medida);margin:0 auto;padding:clamp(3rem,6vw,6.5rem) 0 clamp(3rem,5vw,5rem);}
+
+.volanta{
+  font-family:var(--font-eyebrow);font-weight:300;
+  font-size:clamp(.66rem,.3vw + .58rem,.78rem);
+  text-transform:uppercase;letter-spacing:.2em;color:var(--bordeaux);
+  margin:0 0 clamp(1.1rem,2vw,1.9rem);
+}
+.titulo{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(2.15rem,1.6vw + 1.75rem,3.5rem);
+  line-height:1.06;letter-spacing:.012em;
+  color:var(--taupe);margin:0;
+  text-wrap:balance;
+}
+.bajada{
+  font-style:italic;color:var(--taupe);
+  font-size:clamp(1.12rem,.45vw + 1rem,1.38rem);
+  line-height:1.55;margin:clamp(1.5rem,2.6vw,2.3rem) 0 0;
+}
+.fecha{
+  display:block;margin-top:clamp(1.6rem,2.6vw,2.4rem);
+  padding-top:clamp(1rem,1.6vw,1.4rem);border-top:1px solid var(--linea);
+  font-family:var(--font-eyebrow);font-size:.7rem;
+  text-transform:uppercase;letter-spacing:.16em;color:var(--taupe);
+}
+
+.cuerpo{margin-top:clamp(2.4rem,4vw,3.4rem);}
+.cuerpo > p{margin:0 0 1.35em;}
+.cuerpo strong{font-weight:600;color:var(--ink);}
+.cuerpo a{color:var(--bordeaux);text-decoration:underline;text-underline-offset:.22em;text-decoration-thickness:1px;}
+.cuerpo a:hover{background:rgba(73,37,47,.07);}
+
+.cuerpo h2{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(1.42rem,.75vw + 1.22rem,1.95rem);
+  line-height:1.12;letter-spacing:.015em;color:var(--taupe);
+  margin:clamp(2.8rem,4.6vw,4rem) 0 1.15em;
+  padding-top:clamp(1.1rem,1.8vw,1.6rem);border-top:1px solid var(--linea);
+}
+
+/* --- cita destacada ------------------------------------------------------
+   El sitio destaca con manuscrita (Belmonte). Acá no: una nota tiene hasta
+   ocho destacados y ocho bloques de letra manuscrita serían ilegibles y
+   ruidosos. Se usa el mismo bordó y la misma función —sacar la frase del
+   caudal— con una regla al margen. */
+.destacado{
+  margin:clamp(2.2rem,3.4vw,3rem) 0;
+  padding:.1rem 0 .1rem clamp(1.2rem,2vw,1.8rem);
+  border-left:2px solid var(--bordeaux);
+  color:var(--bordeaux);font-weight:500;
+  font-size:clamp(1.18rem,.5vw + 1.05rem,1.46rem);
+  line-height:1.42;
+}
+
+/* --- lista de flechas ---------------------------------------------------- */
+.puntos{list-style:none;margin:clamp(1.8rem,2.8vw,2.5rem) 0;padding:0;}
+.puntos li{
+  position:relative;padding-left:1.9em;margin-bottom:1.15em;
+}
+.puntos li::before{
+  content:"→";position:absolute;left:0;top:0;
+  color:var(--bordeaux);font-weight:500;
+}
+.puntos li strong{color:var(--bordeaux);font-weight:600;}
+
+/* --- nota de fuente ------------------------------------------------------
+   Es el elemento que sostiene la credibilidad de toda la sección: cada
+   afirmación con dato duro trae debajo de dónde salió. Por eso tiene forma
+   propia y no queda como un paréntesis dentro del párrafo. */
+.fuente{
+  margin:-.4em 0 1.8em;padding:.75em 0 0;
+  border-top:1px solid var(--linea);
+  font-size:clamp(.82rem,.2vw + .78rem,.92rem);
+  line-height:1.5;color:var(--taupe);
+}
+.fuente b{
+  display:block;font-family:var(--font-eyebrow);font-weight:400;
+  font-size:.66rem;text-transform:uppercase;letter-spacing:.18em;
+  color:var(--bordeaux);margin-bottom:.35em;
+}
+.fuente a{color:var(--taupe);text-decoration:underline;text-underline-offset:.2em;}
+.fuente a:hover{color:var(--bordeaux);}
+
+/* --- recuadros ----------------------------------------------------------- */
+
+/* «Desde el origen» es el único lugar donde Corbeau habla en primera persona
+   dentro de un análisis que por lo demás es neutral. El diseño lo dice: se
+   sale de la columna de lectura y se pone la franja bordó del sitio. */
+.origen{
+  margin:clamp(2.6rem,4vw,3.6rem) calc(var(--gutter) * -.5);
+  padding:clamp(1.8rem,3vw,2.6rem) clamp(1.6rem,3vw,2.6rem);
+  background:var(--bordeaux);color:var(--stone);
+}
+.origen b{
+  display:block;font-family:var(--font-eyebrow);font-weight:400;
+  font-size:.68rem;text-transform:uppercase;letter-spacing:.2em;
+  color:#e2dfdd;opacity:.8;margin-bottom:.9em;
+}
+.origen p{margin:0;font-size:clamp(1.04rem,.3vw + .97rem,1.18rem);}
+
+/* «Modelo de consulta» es un texto para copiar y pegar. Va encuadrado y en
+   itálica, con los corchetes a la vista. */
+.modelo{
+  margin:clamp(2.4rem,3.6vw,3.2rem) 0;
+  padding:clamp(1.5rem,2.4vw,2.1rem);
+  border:1px solid var(--linea);background:#fbfaf9;
+}
+.modelo b{
+  display:block;font-family:var(--font-eyebrow);font-weight:400;
+  font-size:.68rem;text-transform:uppercase;letter-spacing:.2em;
+  color:var(--bordeaux);margin-bottom:.9em;
+}
+.modelo p{margin:0;font-style:italic;color:var(--taupe);}
+
+/* --- tablas -------------------------------------------------------------- */
+.tabla-envoltura{margin:clamp(2.2rem,3.4vw,3rem) 0;overflow-x:auto;}
+.cuerpo table{border-collapse:collapse;width:100%;min-width:26rem;
+  font-size:clamp(.9rem,.25vw + .84rem,1rem);}
+.cuerpo th{
+  font-family:var(--font-eyebrow);font-weight:400;
+  font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;
+  color:var(--bordeaux);text-align:left;vertical-align:bottom;
+  padding:0 1.2em .8em 0;border-bottom:1px solid var(--bordeaux);
+}
+.cuerpo td{
+  padding:.85em 1.2em .85em 0;border-bottom:1px solid var(--linea);
+  vertical-align:top;
+}
+.cuerpo tr td:first-child{color:var(--ink);font-weight:500;}
+.cuerpo th:last-child,.cuerpo td:last-child{padding-right:0;}
+.pie{
+  margin:.9em 0 0;font-style:italic;color:var(--taupe);
+  font-size:clamp(.82rem,.2vw + .78rem,.9rem);line-height:1.55;
+}
+
+/* --- nota e italica de cierre -------------------------------------------- */
+.nota{
+  margin:clamp(2rem,3vw,2.6rem) 0;font-style:italic;color:var(--taupe);
+  font-size:clamp(.98rem,.25vw + .92rem,1.08rem);line-height:1.62;
+}
+.cuerpo > .nota:last-child{
+  padding-top:clamp(1.4rem,2.2vw,2rem);border-top:1px solid var(--linea);
+}
+
+/* ---------- pie del artículo: el par de idioma y la vuelta ---------- */
+.cierre{
+  max-width:var(--medida);margin:0 auto;
+  padding:clamp(2.4rem,4vw,3.6rem) 0 clamp(4rem,7vw,7rem);
+  border-top:1px solid var(--linea);
+  display:flex;flex-wrap:wrap;gap:1.6rem;justify-content:space-between;
+}
+.cierre a{
+  display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;
+  font-family:var(--font-eyebrow);font-size:clamp(.66rem,.3vw + .58rem,.75rem);
+  text-transform:uppercase;letter-spacing:.14em;color:var(--taupe);
+  padding-bottom:3px;border-bottom:1px solid var(--linea);
+}
+.cierre a:hover{color:var(--bordeaux);border-bottom-color:var(--bordeaux);}
+.cierre svg{width:17px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5;}
+
+/* ===========================================================================
+   El índice
+   =========================================================================== */
+.portada{
+  padding:clamp(3.4rem,7vw,7rem) var(--gutter) clamp(2.6rem,5vw,4.5rem);
+  background:var(--bordeaux);color:var(--stone);
+}
+.portada__caja{max-width:44rem;margin:0 auto;}
+.portada h1{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(2.2rem,2.4vw + 1.6rem,4.2rem);
+  line-height:1.05;letter-spacing:.012em;margin:0;color:var(--stone);
+  text-wrap:balance;
+}
+.portada p{
+  margin:clamp(1.6rem,2.6vw,2.3rem) 0 0;
+  font-size:clamp(1.04rem,.3vw + .97rem,1.2rem);color:var(--stone);opacity:.92;
+}
+.portada .destacado{
+  color:#e2dfdd;border-left-color:#e2dfdd;
+  margin-bottom:0;
+}
+
+.listado{max-width:44rem;margin:0 auto;padding:clamp(2.6rem,5vw,5rem) 0 clamp(3rem,5vw,5rem);}
+.pieza-nota{
+  display:block;text-decoration:none;
+  padding:clamp(2rem,3.4vw,3rem) 0;border-bottom:1px solid var(--linea);
+}
+.pieza-nota:first-child{border-top:1px solid var(--linea);}
+.pieza-nota .volanta{margin-bottom:.85rem;}
+.pieza-nota h2{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(1.6rem,1.1vw + 1.3rem,2.5rem);
+  line-height:1.08;letter-spacing:.014em;color:var(--taupe);margin:0;
+  transition:color .2s ease;
+}
+.pieza-nota p{margin:1rem 0 0;color:var(--lectura);}
+.pieza-nota .leer{
+  display:inline-flex;align-items:center;gap:.65rem;margin-top:1.3rem;
+  font-family:var(--font-eyebrow);font-size:clamp(.66rem,.3vw + .58rem,.75rem);
+  text-transform:uppercase;letter-spacing:.14em;color:var(--bordeaux);
+}
+.pieza-nota .leer svg{width:19px;height:14px;fill:none;stroke:currentColor;stroke-width:1.5;
+  transition:transform .2s ease;}
+.pieza-nota:hover h2{color:var(--bordeaux);}
+.pieza-nota:hover .leer svg{transform:translateX(4px);}
+
+/* los tres formatos, al pie del índice */
+.formatos{
+  max-width:44rem;margin:0 auto;
+  padding:0 0 clamp(4rem,7vw,7rem);
+}
+.formatos h2{
+  font-family:var(--font-eyebrow);font-weight:300;font-size:clamp(.66rem,.3vw + .58rem,.78rem);
+  text-transform:uppercase;letter-spacing:.2em;color:var(--bordeaux);
+  margin:0 0 clamp(1.4rem,2.4vw,2rem);
+}
+.formatos dl{margin:0;display:grid;gap:1.5rem;}
+.formatos dt{font-weight:600;color:var(--ink);}
+.formatos dd{margin:.3em 0 0;color:var(--lectura);}
+
+/* ---------- pie ---------- */
+.site-footer{
+  background:var(--paper);color:var(--taupe);
+  padding:clamp(2.4rem,4vw,3.4rem) var(--gutter);
+  border-top:1px solid var(--linea);
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
+  font-size:clamp(.82rem,.2vw + .78rem,.9rem);
+}
+.site-footer a{text-decoration:none;}
+.site-footer a:hover{color:var(--bordeaux);}
+
+@media print{
+  .site-header,.migas,.cierre,.site-footer{display:none;}
+  body{color:#000;font-size:11pt;}
+  .articulo{max-width:none;}
+}
