@@ -1,0 +1,5 @@
+# Netlify publica la carpeta sitio/ tal como está: no hay paso de armado
+# todavía. Cuando se reconstruya el andamiaje (etapas 1 a 3 del plan), acá se
+# agrega el comando que arma las páginas a partir de las fuentes.
+[build]
+  publish = "sitio"

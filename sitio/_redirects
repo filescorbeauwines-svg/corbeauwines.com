@@ -1,0 +1,37 @@
+# ---------------------------------------------------------------------------
+# corbeauwines.com · redirecciones
+#
+# Estructura por carpeta: /es/ para español, /en/ para inglés. Todo el peso de
+# SEO queda en un solo dominio en vez de repartirse entre subdominios, que es
+# lo que se recomienda hoy para sitios multilingües.
+# ---------------------------------------------------------------------------
+
+# La raíz lleva al idioma por defecto. Va con 302 y no 301 a propósito: el día
+# que se quiera detectar el idioma del navegador, un 301 ya cacheado en los
+# navegadores sería un problema para revertir.
+/                               /es/                                  302!
+
+# --- subdominios del sitio anterior en Wix --------------------------------
+#
+# Los dos tienen ahora destino definitivo, así que van con 301, que es lo que
+# transfiere el posicionamiento del subdominio a la carpeta.
+
+http://es.corbeauwines.com/*    https://corbeauwines.com/es/:splat    301!
+https://es.corbeauwines.com/*   https://corbeauwines.com/es/:splat    301!
+
+http://en.corbeauwines.com/*    https://corbeauwines.com/en/:splat    301!
+https://en.corbeauwines.com/*   https://corbeauwines.com/en/:splat    301!
+
+# --- sistema de pedidos ----------------------------------------------------
+#
+# /pedidos es un enlace que ya circula desde antes del rediseño y tiene que
+# seguir funcionando. NO se resuelve acá con una regla, sino con la página
+# /pedidos/index.html, porque el destino termina en un fragmento (#/login) que
+# resuelve el router de la aplicación: en este formato el «#» es el carácter de
+# comentario y no hay garantía de que sobreviva. La página sí lo lleva entero,
+# y además se puede probar antes de publicar.
+#
+# Esta única regla está para los enlaces viejos con subruta (/pedidos/algo),
+# que si no darían 404. Sin «!», así que no pisa al archivo: /pedidos y
+# /pedidos/ los sigue sirviendo la página.
+/pedidos/*                      /pedidos/                             302

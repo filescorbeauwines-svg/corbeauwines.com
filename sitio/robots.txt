@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+# el portal de pedidos es privado y no tiene por qué indexarse
+Disallow: /pedidos/
+
+Sitemap: https://corbeauwines.com/sitemap.xml
