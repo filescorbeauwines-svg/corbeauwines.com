@@ -1,0 +1,1039 @@
+/* Hoja de estilos del sitio de Corbeau Wines, compartida por todas las
+   páginas y los dos idiomas. */
+/* ============================================================
+   CORBEAU WINES — sistema de diseño v2
+   Valores extraídos de la maqueta de Figma (CW_Web Why Corbeau)
+   ============================================================ */
+
+/* ---------- 1. Tipografías de marca ---------- */
+@font-face{
+  font-family:"Fabiola Capitals";
+  src:url("/assets/fuentes/fabiola-capitals.otf") format("opentype");
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Quasimoda";
+  src:url("/assets/fuentes/quasimoda-light.otf") format("opentype");
+  font-weight:300; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Quasimoda";
+  src:url("/assets/fuentes/quasimoda-light-italic.otf") format("opentype");
+  font-weight:300; font-style:italic; font-display:swap;
+}
+@font-face{
+  font-family:"Quasimoda";
+  src:url("/assets/fuentes/quasimoda-medium.otf") format("opentype");
+  font-weight:500; font-style:normal; font-display:swap;
+}
+/* SemiBold: la maqueta lo usa para el remate de cada bloque de texto */
+@font-face{
+  font-family:"Quasimoda";
+  src:url("/assets/fuentes/quasimoda-semibold.otf") format("opentype");
+  font-weight:600; font-style:normal; font-display:swap;
+}
+/* Manuscrita de las notas al margen */
+@font-face{
+  font-family:"Belmonte Ballpoint Trial Cursive";
+  src:url("/assets/fuentes/belmonte.otf") format("opentype");
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Blair ITC Std";
+  src:url("/assets/fuentes/blair-light.otf") format("opentype");
+  font-weight:300; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Blair ITC Std";
+  src:url("/assets/fuentes/blair-book.otf") format("opentype");
+  font-weight:400; font-style:normal; font-display:swap;
+}
+
+/* ---------- 2. Tokens ---------- */
+:root{
+  /* Verificados en Figma */
+  --stone:      #e3dfdd;   /* texto sobre fondo oscuro */
+  --taupe:      #867a70;   /* títulos y texto sobre fondo claro */
+  --bordeaux:   #49252f;   /* manuscrita */
+  --claret:     #4f232f;   /* cifras destacadas */
+  --ink:        #101211;
+  --charcoal:   #242725;
+
+  /* PROVISIONALES — pendiente el hex exacto de la maqueta */
+  --band-taupe: #8a7f77;   /* franja de apertura */
+  --band-green: #3f5049;   /* franja de certificaciones */
+  --paper:      #ffffff;   /* el pliego de papel */
+  --mist:       #e2dfdd;   /* franja clara fría */
+
+  --font-display: "Fabiola Capitals", "Times New Roman", serif;
+  --font-eyebrow: "Blair ITC Std", Georgia, "Times New Roman", serif;
+  --font-body:    "Quasimoda", "Helvetica Neue", Arial, sans-serif;
+  --font-hand:    "Belmonte Ballpoint Trial Cursive", "Segoe Script", "Bradley Hand", cursive;
+
+  /* Escala proporcional al artboard de 1920 px */
+  --fs-display: clamp(2.4rem, 5.99vw, 7.1875rem); /* 115px */
+  --fs-lead:    clamp(1rem, 1.35vw, 1.625rem);    /* 26px  */
+  --fs-body:    clamp(0.95rem, 1.25vw, 1.5rem);   /* 24px  */
+  --fs-small:   clamp(0.9rem, 1.1vw, 1.3125rem);  /* 21px  */
+  --fs-hand:    clamp(1.5rem, 2.29vw, 2.74375rem);/* 43.9px */
+  --fs-micro:   1rem;                              /* 16px  */
+
+  --lh-display: 1.087; /* 125 / 115 — líneas siguientes */
+  --lh-body:    1.417;  /* 34 / 24   */
+
+  --gutter: clamp(1.5rem, 9.06vw, 10.875rem);     /* 174px en el artboard */
+  --measure: 62ch;
+}
+
+/* ---------- 3. Reset ---------- */
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--taupe);
+  font-family:var(--font-body);
+  font-weight:300;
+  font-size:var(--fs-body);
+  line-height:var(--lh-body);
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;}
+ul,ol{margin:0;padding:0;list-style:none;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4{margin:0;font-weight:400;}
+p{margin:0;}
+:focus-visible{outline:2px solid var(--bordeaux);outline-offset:3px;}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+}
+
+/* ---------- 4. Elementos base ---------- */
+.display{
+  font-family:var(--font-display);
+  font-size:var(--fs-display);
+  line-height:var(--lh-display);
+  letter-spacing:.0097em;   /* 1.1px sobre 115px — el rediseño cerró el tracking */
+  color:var(--stone);
+}
+.display--light{color:var(--taupe);}
+.display--sm{font-size:clamp(1.9rem,4.1vw,4.9rem);}
+
+.eyebrow{
+  font-family:var(--font-eyebrow);
+  font-weight:300;
+  font-size:var(--fs-lead);
+  line-height:1.192;
+  letter-spacing:.0742em;   /* 1.93px sobre 26px */
+  text-transform:uppercase;
+  color:var(--taupe);
+  margin:0 0 1.4rem;
+}
+.band--taupe .eyebrow,.band--green .eyebrow,.band--ink .eyebrow,
+.band--charcoal .eyebrow,.band--photo .eyebrow{color:var(--stone);opacity:.82;}
+
+.lead{font-size:var(--fs-lead);}
+.body{font-size:var(--fs-body);max-width:var(--measure);}
+.body + .body{margin-top:1.25em;}
+/* remate: la maqueta lo pone en SemiBold, no en color */
+.body--close{font-weight:600;margin-top:1.25em;}
+.muted{opacity:.8;}
+
+.arrow{flex:none;width:19px;height:14px;overflow:visible;stroke:currentColor;stroke-width:1;fill:none;}
+
+/* ---------- 5. Botones ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:1.75rem;justify-content:space-between;
+  font-family:var(--font-eyebrow);font-weight:400;
+  font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.0742em;
+  padding:1.5rem 2.2rem;min-width:24rem;
+  background:transparent;
+  border:1px solid currentColor;border-radius:.25rem;
+  cursor:pointer;transition:background-color .25s ease,color .25s ease;
+}
+.btn--onDark{color:var(--stone);}
+.btn--onDark:hover{background:var(--stone);color:var(--ink);}
+.btn--onLight{color:var(--taupe);}
+.btn--onLight:hover{background:var(--taupe);color:var(--paper);}
+
+.link-rule{
+  display:inline-flex;flex-direction:column;gap:.6rem;width:max-content;max-width:100%;
+  font-family:var(--font-eyebrow);font-weight:300;
+  font-size:var(--fs-lead);text-transform:uppercase;letter-spacing:.0742em;
+}
+.link-rule > span{display:inline-flex;align-items:center;gap:.9rem;flex-wrap:wrap;}
+.link-rule::after{
+  content:"";display:block;height:1px;background:currentColor;opacity:.5;
+  width:100%;transform-origin:left;transition:transform .3s ease;
+}
+.link-rule:hover::after{transform:scaleX(1.1);}
+
+/* ---------- 6. Franjas ---------- */
+.band{padding:clamp(3.5rem,7vw,8.5rem) var(--gutter);}
+.band--tight{padding-block:clamp(2.5rem,4.5vw,5rem);}
+/* dos franjas claras seguidas no necesitan el aire de una transición */
+.band--closeBottom{padding-bottom:clamp(1.5rem,2.5vw,3rem);}
+.band--closeTop{padding-top:clamp(1.5rem,2.5vw,3rem);}
+.band--paper{background:var(--paper);color:var(--taupe);}
+.band--mist{background:var(--mist);color:var(--taupe);}
+.band--paper .display,.band--mist .display{color:var(--taupe);}
+.band--mist .eyebrow{color:var(--taupe);}
+.band--taupe{background:var(--band-taupe);color:var(--stone);}
+.band--green{background:var(--band-green);color:var(--stone);}
+.band--ink{background:var(--ink);color:var(--stone);}
+.band--charcoal{background:var(--charcoal);color:var(--stone);}
+
+/* franjas oscuras: composición centrada, como en la maqueta */
+.band--center{text-align:center;}
+.band--center .display{margin-inline:auto;max-width:24ch;}
+.band--center .body,.band--center .lead{margin-inline:auto;max-width:56ch;}
+.band--center .btn{margin-inline:auto;}
+.band--center .eyebrow{margin-bottom:1.6rem;}
+
+/* franja con fotografía a sangre */
+.band--photo{position:relative;isolation:isolate;color:var(--stone);}
+.band--photo__media{position:absolute;inset:0;z-index:-2;overflow:hidden;}
+.band--photo__media img{width:100%;height:100%;object-fit:cover;}
+.band--photo__scrim{position:absolute;inset:0;z-index:-1;background:rgba(16,18,17,.34);}
+
+/* El papel rasgado NO es un divisor: es el pliego sobre el que se escribe.
+   La franja clara ES el pliego; el rasgado es el borde donde termina la hoja
+   y se monta sobre la franja de color contigua (como en la maqueta). */
+.band--paper{position:relative;z-index:2;}
+.band--paper{
+  --tear-h:clamp(46px,5.6vw,112px);
+  --tear-pad:36px;   /* relleno opaco bajo el rasgado superior: permite que el
+                        pliego suba sin que se abra una ranura contra la franja
+                        vecina. Tiene que ser mayor que el recorrido de --tear-y */
+  --tear-y:0px;      /* lo escribe el script del paralaje; 0 = posición de la maqueta */
+}
+.band--paper.edge-top::before,
+.band--paper.edge-bottom::after{
+  content:"";position:absolute;left:50%;
+  transform:translateX(-50%) translateY(calc(-1 * var(--tear-y)));
+  width:112%;pointer-events:none;
+}
+.band--paper.edge-top::before{
+  height:calc(var(--tear-h) + var(--tear-pad));
+  bottom:calc(100% - 6px - var(--tear-pad));
+  background-image:url("/assets/img/textura-d2f02cdd.png"),linear-gradient(var(--paper),var(--paper));
+  background-position:center top,center bottom;
+  background-size:100% var(--tear-h),100% calc(var(--tear-pad) + 1px);
+  background-repeat:no-repeat,no-repeat;
+}
+.band--paper.edge-bottom::after{
+  height:var(--tear-h);
+  top:calc(100% - 6px);
+  background:url("/assets/img/textura-40a9c6a1.png") center top/100% 100% no-repeat;
+}
+/* la franja de color vecina también cede aire: el rasgado se monta sobre ella
+   y no debe pisar el texto */
+.sheet-below{padding-bottom:clamp(4rem,7vw,9rem);}
+.sheet-above{padding-top:clamp(4rem,7vw,9rem);}
+
+/* sello de lacre: se apoya sobre el borde rasgado, como si cerrara la hoja.
+   En la maqueta mide 280 px sobre 1920 y su borde derecho coincide con el gutter. */
+.wax{
+  --wax:clamp(92px,14.6vw,280px);
+  position:absolute;z-index:6;
+  right:var(--gutter);top:calc(var(--wax) * -0.45);
+  width:var(--wax);height:auto;
+  filter:drop-shadow(0 12px 22px rgba(16,18,17,.3));
+  pointer-events:none;
+}
+
+/* el pliego necesita aire extra donde tiene borde rasgado */
+.band--paper.edge-top{padding-top:clamp(4.5rem,8vw,10rem);}
+.band--paper.edge-bottom{padding-bottom:clamp(4.5rem,8vw,10rem);}
+
+/* ---------- 7. Header ---------- */
+.site-header{
+  position:sticky;top:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;
+  padding:1.25rem var(--gutter);
+  background:var(--paper);
+  border-bottom:1px solid rgba(132,122,113,.16);
+}
+.brand{display:flex;align-items:center;cursor:pointer;color:var(--ink);}
+.brand__logo{display:block;width:clamp(112px,9.4vw,152px);height:auto;fill:currentColor;}
+.site-nav{display:flex;flex-wrap:wrap;gap:clamp(.5rem,1.15vw,1.45rem);}
+.site-nav a{
+  font-family:var(--font-eyebrow);font-weight:400;
+  /* los rótulos en español son bastante más largos que los ingleses; cuerpo
+     y tracking ceden con el ancho para que el menú no se parta en dos líneas
+     antes de pasar a hamburguesa. El selector de idioma sumó un elemento más,
+     y con él el umbral quedó en 1240px: medido, no elegido. */
+  font-size:clamp(.635rem,.44vw + .245rem,.76rem);
+  text-transform:uppercase;letter-spacing:clamp(.032em,.085vw - .03em,.085em);
+  color:var(--taupe);white-space:nowrap;
+  padding-bottom:2px;border-bottom:1px solid transparent;cursor:pointer;
+}
+.site-nav a:hover,.site-nav a[aria-current="page"]{border-bottom-color:var(--bordeaux);}
+.site-nav a.is-off{opacity:.45;}
+
+/* Soluciones con desplegable */
+.navitem{position:relative;display:flex;align-items:center;gap:.35rem;}
+.navitem__caret{
+  background:none;border:0;padding:0 .1rem;cursor:pointer;color:var(--taupe);
+  display:inline-flex;align-items:center;
+}
+.navitem__caret svg{width:10px;height:6px;fill:none;stroke:currentColor;stroke-width:1.4;overflow:visible;
+  transition:transform .2s ease;}
+.navitem[data-open="true"] .navitem__caret svg{transform:rotate(180deg);}
+.drop{
+  position:absolute;top:calc(100% + .9rem);right:-1.1rem;left:auto;z-index:70;
+  min-width:16rem;padding:.5rem 0;
+  background:var(--paper);
+  border:1px solid rgba(134,122,112,.22);
+  box-shadow:0 18px 40px rgba(16,18,17,.14);
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity .18s ease,transform .18s ease,visibility .18s;
+}
+.navitem:hover .drop,
+.navitem:focus-within .drop,
+.navitem[data-open="true"] .drop{opacity:1;visibility:visible;transform:none;}
+.drop a{
+  display:block;padding:.62rem 1.4rem;
+  font-family:var(--font-body);font-weight:300;font-size:.95rem;
+  text-transform:none;letter-spacing:0;border-bottom:0;color:var(--taupe);
+}
+.drop a:hover{background:rgba(134,122,112,.1);}
+.drop a.is-current{font-weight:600;color:var(--claret);}
+
+/* selector de idioma · el par ES/EN vive en el menú, no en una barra aparte:
+   es una decisión de una sola vez y no compite con la navegación */
+.langs{
+  display:inline-flex;align-items:center;gap:.45rem;
+  margin-left:clamp(.1rem,.9vw,.8rem);
+  font-family:var(--font-eyebrow);
+  font-size:clamp(.635rem,.44vw + .245rem,.76rem);
+  text-transform:uppercase;letter-spacing:.085em;
+  color:var(--taupe);white-space:nowrap;
+}
+.langs__on{font-weight:600;color:var(--claret);}
+.langs__sep{opacity:.45;}
+.langs__alt{opacity:.66;}
+.langs__alt:hover{opacity:1;}
+.nav-toggle{display:none;}
+.band--center .hand{margin-inline:auto;max-width:38ch;transform:rotate(-.8deg);}
+
+/* el borde rasgado sangra a los lados: se recorta en horizontal sin
+   perder el desborde vertical del pliego */
+main{overflow-x:clip;}
+
+/* ---------- 10. Estructura ---------- */
+.page[hidden]{display:none;}
+.display.display--bordo{color:var(--bordeaux);}  /* gana a .band--paper .display */
+.sec{scroll-margin-top:8rem;}
+.sec + .sec{margin-top:clamp(3.5rem,7vw,8.5rem);}
+/* cuando dos .sec son bandas completas ese margen dejaba ver el blanco del body
+   entre franjas de color: el relleno de cada banda ya da la separación */
+.band.sec + .band.sec{margin-top:0;}
+.sec--divided{margin-top:clamp(3rem,5vw,5.5rem);padding-top:clamp(2.5rem,4vw,4rem);border-top:1px solid currentColor;}
+.sec--divided{border-color:rgba(226,223,221,.22);}
+.split{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);
+  gap:clamp(2rem,4vw,5rem);align-items:start;
+}
+.split__aside{align-self:center;}
+.stack > * + *{margin-top:1.25em;}
+.sec__head{margin-bottom:clamp(1.6rem,2.6vw,2.6rem);}
+.sec__title{
+  font-family:var(--font-display);
+  font-size:clamp(1.9rem,4.6vw,5.6rem);
+  line-height:1.087;letter-spacing:.0097em;
+  color:var(--taupe);max-width:16ch;
+}
+.band--taupe .sec__title,.band--green .sec__title,.band--ink .sec__title,
+.band--charcoal .sec__title,.band--photo .sec__title{color:var(--stone);}
+
+/* cita manuscrita */
+.compare + .hand{margin-top:clamp(2.4rem,4vw,3.4rem);}
+.hand{
+  font-family:var(--font-hand);
+  font-size:var(--fs-hand);
+  line-height:1.45;    /* Belmonte tiene ascendentes y descendentes mucho más cortas que Biro
+                          (900/-300 contra 1072/-617): con el 1,708 de la maqueta las líneas se separaban de más */
+  color:var(--bordeaux);
+  max-width:30ch;
+  transform:rotate(-1.2deg);
+}
+.band--taupe .hand,.band--green .hand,.band--ink .hand,
+.band--charcoal .hand,.band--photo .hand{color:#e2dfdd;}
+
+/* línea punteada de la historia */
+.dotline{display:flex;align-items:center;gap:0;width:100%;max-width:36rem;}
+.dotline span{flex:none;width:11px;height:11px;border-radius:50%;background:currentColor;opacity:.55;}
+.dotline i{flex:1;height:1px;background:currentColor;opacity:.4;}
+
+/* fotografía */
+.photo img{width:100%;height:auto;}
+.photo--polaroid{max-width:34rem;transform:rotate(2deg);}
+.photo figcaption{margin-top:.9rem;font-size:.92rem;opacity:.75;}
+
+/* sellos de certificación */
+/* Certificaciones: los sellos solos, sin placa ni fondo, como en la maqueta.
+   Los cuatro archivos venían con criterios distintos —LETIS en color sobre
+   fondo blanco, B.A. y Vegan en negro sobre transparencia—, así que se pasaron
+   a una sola tinta clara con el fondo recortado. La altura es la que iguala las
+   circunferencias: en los LETIS la barra sobresale unos pocos px a los lados,
+   de modo que normalizar por ancho dejaría ese círculo más chico que los otros. */
+.seals{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:clamp(1.8rem,3.6vw,4rem);margin-top:clamp(2.5rem,4vw,4rem);
+}
+.seal img,img.seal{height:clamp(5.5rem,8.4vw,9rem);width:auto;display:block;}
+
+/* marca de sección: el icono de Figma que corresponde al tema, grande, en la
+   columna del título. Ocupa el lugar donde iría una fotografía si aparece. */
+.sec-ic{display:block;width:clamp(72px,6.4vw,124px);aspect-ratio:1;height:auto;
+  fill:currentColor;opacity:.9;margin:0 0 clamp(1.2rem,2vw,1.9rem);}
+
+/* fotografía de sección: va a ancho completo de la caja, debajo del par
+   título/cuerpo. Sobre banda oscura la imagen es lo único luminoso, así que se
+   la baja un punto de saturación para que no se despegue de la paleta. */
+.shot{margin-top:clamp(2.2rem,3.4vw,3.6rem);}
+.shot img{
+  display:block;width:100%;height:auto;
+  max-height:clamp(300px,44vw,600px);object-fit:cover;object-position:center 34%;
+  filter:saturate(.82) contrast(1.03) brightness(.97);
+}
+.shot figcaption{
+  margin-top:clamp(.7rem,1vw,1rem);font-size:var(--fs-tiny);
+  letter-spacing:.055em;text-transform:uppercase;opacity:.55;
+}
+
+/* protocolo con tildes (3.9) */
+.checks{display:grid;gap:clamp(.9rem,1.4vw,1.3rem);margin-top:clamp(2rem,3vw,3rem);text-align:left;max-width:62rem;}
+.check{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(.9rem,1.4vw,1.4rem);align-items:start;}
+.check svg{
+  width:clamp(1.15rem,1.5vw,1.5rem);height:auto;flex:none;margin-top:.15em;
+  fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
+}
+.check p{font-size:var(--fs-small);line-height:1.38;}
+.check b{font-weight:600;}
+
+/* lista con reglas (páginas 03 y 05) */
+.rule-list{border-top:1px solid currentColor;margin-top:2.5rem;}
+.rule-list li{
+  border-bottom:1px solid currentColor;padding:clamp(1.1rem,2vw,1.9rem) 0;
+  display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(1rem,3vw,3rem);
+  text-align:left;
+}
+.rule-list h3{
+  font-family:var(--font-body);font-weight:600;
+  font-size:var(--fs-small);text-transform:uppercase;letter-spacing:.02em;line-height:1.2;
+}
+.rule-list p{font-size:var(--fs-body);}
+
+/* cifras */
+.figures{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1.2rem,2.2vw,2.4rem);margin:clamp(2rem,3.5vw,3.6rem) 0;text-align:left;}
+.band--center .figures{text-align:center;}
+/* Cada cifra se lee en DOS tiempos: el dato con su unidad forman una sola
+   unidad visual en Fabiola, y la aclaración baja a Quasimoda debajo. La unidad
+   acompaña al número en la misma línea, alineada a su base, no debajo. */
+.figure{min-width:0;}
+/* la foto va arriba de todo, antes de la línea: primero se ve la cosa, después
+   se lee el dato. Proporción fija para que las cinco alineen aunque los
+   originales vengan de cámaras distintas. */
+.figure__pic{
+  display:block;width:100%;aspect-ratio:3/2;height:auto;object-fit:cover;
+  margin-bottom:clamp(.85rem,1.25vw,1.25rem);
+  filter:saturate(.84) contrast(1.03);
+}
+.figure__head{display:block;border-top:1px solid currentColor;padding-top:clamp(1rem,1.5vw,1.6rem);margin-bottom:.75em;}
+.figure__value{
+  font-family:var(--font-display);font-size:clamp(1.9rem,3.6vw,4.2rem);
+  line-height:1;letter-spacing:.0097em;
+}
+.figure__unit{
+  font-family:var(--font-display);
+  font-size:clamp(1.28rem,2vw,2.35rem);line-height:1.05;letter-spacing:.045em;
+  text-transform:uppercase;margin-left:.34em;
+}
+.figure__label{font-size:var(--fs-small);line-height:1.3;opacity:.72;}
+
+/* cadena de control */
+.chain{
+  --node-ic:clamp(68px,5.2vw,96px);
+  display:grid;grid-auto-flow:column;grid-auto-columns:minmax(216px,1fr);gap:0;
+  margin-top:clamp(2.5rem,5vw,4.5rem);overflow-x:auto;scroll-snap-type:x proximity;
+  padding-bottom:1.5rem;text-align:left;
+}
+.node{position:relative;padding:0 clamp(.85rem,1.5vw,1.7rem) 0 0;scroll-snap-align:start;display:block;}
+.node:not(:last-child)::after{content:"";position:absolute;top:calc(var(--node-ic) / 2);right:2px;width:19px;height:1px;background:currentColor;opacity:.6;}
+.node:not(:last-child)::before{content:"";position:absolute;top:calc(var(--node-ic) / 2 - 6px);right:2px;width:10px;height:10px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg);opacity:.6;}
+.node__icon{display:block;width:var(--node-ic);aspect-ratio:1;height:auto;margin:0 0 1.2rem;fill:#9d958d;stroke:none;transition:fill .25s ease;}
+.node__name{font-family:var(--font-body);font-weight:600;font-size:var(--fs-small);text-transform:uppercase;letter-spacing:.02em;margin-bottom:.5rem;}
+.node__desc{font-size:.95rem;opacity:.72;line-height:1.3;}
+a.node:hover .node__icon{fill:#c9c2bb;}
+
+/* comparativa */
+.compare{margin-top:clamp(2.5rem,4vw,4rem);border-top:1px solid currentColor;text-align:left;}
+.compare__row{
+  display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(1rem,2.6vw,3rem);padding:clamp(1.1rem,2vw,1.8rem) 0;
+  border-bottom:1px solid currentColor;align-items:start;
+}
+.compare__head span{font-family:var(--font-eyebrow);font-weight:400;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;opacity:.7;}
+.compare__head span.is-us{opacity:1;color:#e2dfdd;}
+.band--paper .compare__head span.is-us{color:var(--bordeaux);}
+.compare__crit{font-family:var(--font-body);font-weight:600;font-size:var(--fs-small);text-transform:uppercase;letter-spacing:.02em;line-height:1.2;}
+.compare__cell{font-size:var(--fs-small);line-height:1.35;opacity:.68;}
+.compare__cell.is-us{opacity:1;}
+
+/* comparativa en bordó */
+.compare--bordo{border-top-color:rgba(73,37,47,.4);}
+.compare--bordo .compare__row{border-bottom-color:rgba(73,37,47,.22);}
+/* la columna de maceración tradicional conserva el gris: es la que se contrasta */
+.compare--bordo .compare__crit,
+.compare--bordo .compare__head span.is-us,
+.compare--bordo .compare__cell.is-us{color:var(--bordeaux);opacity:1;}
+
+/* pasos */
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin-top:clamp(2.5rem,4vw,4rem);border-top:1px solid currentColor;text-align:left;}
+.step{padding:clamp(1.6rem,2.4vw,2.4rem) clamp(1rem,1.6vw,1.8rem) clamp(1.6rem,2.4vw,2.4rem) 0;border-right:1px solid currentColor;}
+/* el primer paso alinea con el margen; los demás se separan de su línea divisoria */
+.step + .step{padding-left:clamp(1.2rem,2vw,2.2rem);}
+.step:last-child{border-right:0;}
+.step__n{font-family:var(--font-display);font-size:clamp(1.6rem,2.6vw,2.6rem);line-height:1;letter-spacing:.0097em;display:block;margin-bottom:1rem;opacity:.85;}
+.step__t{font-size:var(--fs-small);line-height:1.32;margin-bottom:1rem;}
+.step__time{font-family:var(--font-eyebrow);font-weight:400;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;opacity:.65;}
+
+/* mapa */
+.mapfig{margin-top:clamp(2.2rem,3.5vw,3.4rem);}
+.mapfig svg{width:100%;height:auto;}
+.mapfig figcaption{margin-top:1.2rem;font-size:.92rem;opacity:.75;max-width:60ch;text-align:left;}
+
+/* barras */
+.gauge{margin-top:clamp(2rem,3vw,3rem);display:grid;gap:1.6rem;max-width:52rem;text-align:left;}
+.gauge__row{display:grid;grid-template-columns:minmax(0,10rem) 1fr;gap:1.2rem;align-items:center;}
+.gauge__label{font-family:var(--font-eyebrow);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;opacity:.7;}
+.gauge__bar{display:flex;align-items:center;gap:.8rem;font-size:.88rem;}
+.gauge__fill{height:10px;border-radius:999px;background:currentColor;opacity:.75;}
+
+/* trazabilidad */
+/* trazabilidad · gráfico rediseñado en Figma ("Gráfico Trazabilidad") ------------
+   Medido sobre el SVG: artboard 1600, contenido 1289,14 (márgenes 155,43).
+   Columnas 25,48 / 19,67 / 19,43 / 18,51 / 16,91 %.
+   Tipografía: volanta 16 (ls .27em, #b5afaa) · píldora 18,6 caja 35,66
+   · lista 18,9 interlínea 25 · guion + espacio 13,6.  Todo x1,2 al artboard de 1920. */
+.trace{
+  --tz-fs:clamp(.9rem,1.18vw,1.42rem);          /* 22,7px @1920 */
+  --tz-line:#847a71;
+  display:grid;
+  grid-template-columns:25.48% 19.67% 19.43% 18.51% 16.91%;
+  align-items:start;gap:0;
+  margin-top:clamp(2.4rem,4vw,4.2rem);
+  text-align:left;color:var(--tz-line);
+}
+.trace__step{position:relative;padding-right:clamp(.8rem,1.2vw,1.6rem);min-width:0;}
+/* el objeto de cada paso, con los iconos de la cadena del Home: refuerza que
+   la trazabilidad se recorre hacia atrás sobre cosas concretas */
+.trace__ic{display:block;width:clamp(38px,3.1vw,58px);aspect-ratio:1;height:auto;
+  fill:var(--tz-line);margin:0 0 calc(var(--tz-fs) * .62);opacity:.9;}
+.trace__n{
+  display:block;font-family:var(--font-body);font-weight:300;
+  font-size:calc(var(--tz-fs) * .845);          /* 19,2px @1920 */
+  line-height:1;letter-spacing:.27em;text-transform:uppercase;
+  color:#b5afaa;opacity:1;
+  margin-bottom:calc(var(--tz-fs) * .81);       /* 20,3px de la base de la volanta al borde de la píldora */
+}
+.trace__name{
+  display:inline-block;font-family:var(--font-body);font-weight:300;
+  font-size:calc(var(--tz-fs) * .982);          /* 22,3px @1920 */
+  line-height:1.867;                              /* 42,8px de alto de píldora, bordes incluidos */
+  text-transform:uppercase;letter-spacing:0;
+  color:var(--tz-line);border:1px solid var(--tz-line);border-radius:999px;
+  padding:0 .72em 0 .5em;margin:0 0 0 -.5em;    /* la píldora cuelga a la izquierda: el texto alinea con la columna */
+  white-space:nowrap;
+}
+.trace__docs{display:block;margin-top:calc(var(--tz-fs) * .79);}
+.trace__docs li{display:flex;font-size:var(--tz-fs);line-height:1.3228;}  /* 25px sobre 18,9 */
+.trace__docs li::before{content:"-";flex:0 0 .72em;}
+@media(max-width:1200px){
+  .trace{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(1.4rem,3vw,3rem);row-gap:clamp(2rem,3.4vw,3rem);}
+}
+@media(max-width:700px){
+  .trace{grid-template-columns:minmax(0,1fr);}
+}
+
+/* segmentos */
+.tiers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:clamp(2.2rem,3.5vw,3.4rem);text-align:left;}
+.tier{border-top:2px solid currentColor;padding:1.4rem clamp(1rem,1.6vw,1.8rem) 0 0;}
+.tier:nth-child(1){opacity:.55;}
+.tier:nth-child(2){opacity:.7;}
+.tier:nth-child(3){opacity:.85;}
+.tier__name{font-family:var(--font-body);font-weight:600;font-size:var(--fs-small);text-transform:uppercase;letter-spacing:.02em;margin-bottom:.6rem;}
+.tier__desc{font-size:.95rem;line-height:1.32;opacity:.8;}
+
+/* ---------- 11. Footer ---------- */
+.site-footer{background:var(--paper);color:var(--taupe);padding:clamp(3.5rem,6vw,6rem) var(--gutter) 2.5rem;}
+.footer__cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1.5rem,3vw,3rem);border-top:1px solid rgba(132,122,113,.28);padding-top:clamp(2.5rem,4vw,3.5rem);}
+.footer__cols h4{font-family:var(--font-eyebrow);font-weight:400;font-size:.82rem;text-transform:uppercase;letter-spacing:.11em;opacity:.7;margin-bottom:1.2rem;}
+.footer__cols li{padding:.4rem 0;font-size:.95rem;}
+.footer__cols a:hover{color:var(--bordeaux);}
+.newsletter{display:flex;border:1px solid rgba(132,122,113,.45);border-radius:999px;overflow:hidden;}
+.newsletter input{flex:1;min-width:0;border:0;background:transparent;padding:.85rem 1.2rem;font:inherit;font-size:.95rem;color:inherit;}
+.newsletter button{border:0;background:var(--taupe);color:var(--paper);padding:0 1.3rem;cursor:pointer;font-size:1rem;}
+.newsletter button:hover{background:var(--bordeaux);}
+.footer__base{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:clamp(2.5rem,4vw,4rem);font-size:.8rem;opacity:.7;}
+
+/* ---------- 13. Componentes de las páginas 04 · 06 · 07 · 08 · 09 · 10 ---------- */
+.doors > *,.brands > *,.contents > *,.markets > *,.ticker > *,.form-grid > *,.split > *{min-width:0;}
+
+/* cuatro puertas de entrada (4.1–4.4) */
+.doors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1rem,2vw,2rem);margin-top:clamp(2.5rem,4vw,4rem);text-align:left;}
+.door{
+  border:1px solid currentColor;border-radius:1rem;overflow:hidden;
+  padding:0 clamp(1.6rem,2.6vw,2.8rem) clamp(1.6rem,2.6vw,2.8rem);
+  display:flex;flex-direction:column;gap:1.1rem;align-items:flex-start;
+  transition:background-color .3s ease;
+}
+/* la foto va a sangre dentro de la tarjeta: es la misma que la del Home */
+.door__media{
+  align-self:stretch;aspect-ratio:16/10;overflow:hidden;
+  margin:0 calc(-1 * clamp(1.6rem,2.6vw,2.8rem)) clamp(.5rem,1vw,1rem);
+  background:rgba(132,122,113,.25);
+}
+.door__media img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+.door:hover .door__media img{transform:scale(1.04);}
+.door:hover{background:rgba(132,122,113,.08);}
+.band--ink .door:hover,.band--charcoal .door:hover,.band--taupe .door:hover,.band--green .door:hover{background:rgba(226,223,221,.07);}
+.door__title{font-family:var(--font-display);font-size:clamp(1.4rem,2.3vw,2.4rem);line-height:1.14;letter-spacing:.0097em;}
+.door__desc{font-size:var(--fs-small);line-height:1.35;}
+
+/* matriz de capacidades (4.5) */
+.matrix{margin-top:clamp(2.5rem,4vw,4rem);border-top:1px solid currentColor;text-align:left;overflow-x:auto;}
+.matrix__row{
+  display:grid;grid-template-columns:minmax(150px,1.1fr) repeat(3,minmax(110px,1fr));
+  gap:clamp(.8rem,2vw,2.4rem);padding:clamp(.9rem,1.7vw,1.5rem) 0;
+  border-bottom:1px solid currentColor;align-items:baseline;
+}
+.matrix__row--head span{font-family:var(--font-eyebrow);font-weight:400;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.7;}
+.matrix__k{font-family:var(--font-body);font-weight:600;font-size:var(--fs-small);text-transform:uppercase;letter-spacing:.02em;}
+.matrix__v{font-size:var(--fs-small);opacity:.8;}
+.matrix__v em{font-style:normal;opacity:.5;}
+
+/* mercados (4.6) */
+.markets{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1rem,2vw,2rem);margin-top:clamp(2.5rem,4vw,3.6rem);text-align:left;}
+.market h3{font-family:var(--font-eyebrow);font-weight:400;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;opacity:.7;margin-bottom:.9rem;padding-bottom:.6rem;border-bottom:1px solid currentColor;}
+.market li{font-size:var(--fs-small);padding:.35rem 0;opacity:.85;}
+.market li.is-pending{opacity:.42;}
+/* la nómina de países es prueba, no límite: una línea la encuadra antes y
+   otra la abre después, para que no se lea como el catálogo cerrado */
+.markets__lead{
+  font-family:var(--font-eyebrow);font-size:var(--fs-tiny);
+  letter-spacing:.14em;text-transform:uppercase;opacity:.6;
+  /* tiene que despegarse del título grande: pegada se lee como su bajada */
+  margin:clamp(2.2rem,3.6vw,3.8rem) 0 clamp(1.1rem,1.6vw,1.6rem);
+}
+.markets__open{
+  max-width:52rem;margin-top:clamp(1.8rem,2.6vw,2.8rem);
+  font-size:var(--fs-small);line-height:1.45;
+  padding-top:clamp(1.1rem,1.6vw,1.6rem);border-top:1px solid currentColor;
+}
+/* el enlace tiene que verse enlace: en una lista de datos, si no se subraya
+   se lee como una línea más de texto */
+.market li a{text-decoration:underline;text-underline-offset:.22em;text-decoration-thickness:1px;}
+.market li a:hover{opacity:.7;}
+
+/* descomposición de precio (6.3) y cascada (8.2) */
+/* ---------- Páginas de marca · catálogo (11 y 12) ---------- */
+/* La grilla muestra botella, varietal y descarga. La ficha completa vive en el
+   PDF: quien la necesita se la lleva, y el que mira el catálogo lo recorre de
+   un vistazo en vez de leer nueve bloques de texto. */
+.catalogo{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:clamp(2rem,3.4vw,3.4rem) clamp(1.2rem,2.2vw,2.4rem);
+  margin-top:clamp(1.6rem,2.4vw,2.4rem);text-align:left;
+}
+.pieza{display:flex;flex-direction:column;align-items:center;text-align:center;}
+.pieza__shot{
+  display:block;width:auto;height:clamp(220px,22vw,320px);
+  object-fit:contain;object-position:bottom center;margin-bottom:clamp(1rem,1.5vw,1.4rem);
+}
+.pieza__name{
+  font-family:var(--font-display);font-size:clamp(1.05rem,1.5vw,1.5rem);
+  line-height:1.1;letter-spacing:.0097em;margin-bottom:.45em;
+}
+.pieza__meta{font-size:var(--fs-tiny);letter-spacing:.05em;opacity:.6;margin-bottom:.9rem;line-height:1.35;}
+/* los oros son de un jurado externo: se muestran como dato, no como adorno */
+/* la distinción acompaña al nombre, no compite con el botón: va más chica */
+.pieza__oro{
+  display:inline-block;font-family:var(--font-eyebrow);white-space:nowrap;
+  font-size:clamp(.52rem,.38vw + .26rem,.64rem);
+  letter-spacing:.09em;text-transform:uppercase;
+  border:1px solid currentColor;padding:.34em .7em;margin-bottom:.85rem;opacity:.75;
+}
+/* pastilla en vez de subrayado: el rótulo entra en dos líneas cuando hace
+   falta sin desbordar la tarjeta ni pisar a la de al lado */
+.pieza__ficha{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55em;
+  margin-top:auto;max-width:100%;text-align:center;white-space:nowrap;
+  font-family:var(--font-eyebrow);
+  /* achicado para que «descargar ficha» entre en una sola línea dentro de la
+     tarjeta, que mide 200 px en la grilla más angosta */
+  font-size:clamp(.56rem,.42vw + .28rem,.7rem);
+  letter-spacing:.055em;text-transform:uppercase;line-height:1.2;
+  border:1px solid currentColor;padding:.7em 1.05em;cursor:pointer;
+  transition:background .18s ease,color .18s ease;
+}
+.pieza__ficha:hover{background:currentColor;}
+.pieza__ficha:hover span{color:var(--paper);}
+.pieza__ficha svg{width:11px;height:12px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round;}
+.pieza__ficha:hover svg{stroke:var(--paper);}
+.pieza__ficha.is-pending{border-style:dashed;opacity:.38;cursor:default;}
+.pieza__ficha.is-pending:hover{background:none;}
+.catalogo__grupo{
+  grid-column:1/-1;
+  font-family:var(--font-eyebrow);font-size:var(--fs-tiny);letter-spacing:.2em;
+  text-transform:uppercase;opacity:.55;
+  padding-top:clamp(1.4rem,2.2vw,2.2rem);border-top:1px solid currentColor;
+}
+.catalogo__grupo:first-child{padding-top:0;border-top:0;}
+.catalogo__grupo b{display:block;font-weight:400;opacity:.75;text-transform:none;
+  letter-spacing:.02em;margin-top:.5em;font-family:var(--font-body);}
+
+/* 6.3 · la cascada hacia atrás.
+   Reemplaza a la barra proporcional: los pesos de cada componente cambian con
+   el mercado y con el proyecto, así que dibujar anchos era afirmar un dato que
+   no existe. Lo que sí es estable es la LISTA de componentes y el orden en que
+   se restan — eso es lo que se muestra, y al lado, qué hace variar a cada uno. */
+.backw{margin-top:clamp(2.5rem,4vw,3.6rem);max-width:64rem;text-align:left;}
+.backw__step{
+  font-family:var(--font-eyebrow);font-size:.72rem;letter-spacing:.2em;
+  text-transform:uppercase;opacity:.6;margin-bottom:.5rem;
+}
+.backw__price{
+  font-family:var(--font-display);font-size:clamp(1.6rem,2.8vw,2.9rem);
+  line-height:1.05;letter-spacing:.0097em;
+  padding-bottom:clamp(1.3rem,2vw,1.9rem);border-bottom:1px solid currentColor;
+}
+.backw__list{list-style:none;margin:0;padding:0;}
+.backw__row{
+  display:grid;grid-template-columns:2.1rem minmax(0,1fr);
+  gap:clamp(.7rem,1.1vw,1.1rem);
+  padding:clamp(1rem,1.5vw,1.4rem) 0;
+  border-bottom:1px solid rgba(226,223,221,.18);
+}
+.backw__minus{
+  font-family:var(--font-eyebrow);font-size:1.45rem;line-height:1.15;
+  opacity:.45;text-align:center;
+}
+.backw__k{font-size:var(--fs-small);line-height:1.35;font-weight:600;margin-bottom:.3em;}
+.backw__why{font-size:var(--fs-small);line-height:1.38;opacity:.62;}
+/* el resultado es el único bloque resaltado: es lo que el cliente compra */
+.backw__end{
+  display:grid;grid-template-columns:2.1rem minmax(0,1fr);
+  gap:clamp(.7rem,1.1vw,1.1rem);
+  margin-top:clamp(1.4rem,2.2vw,2rem);padding-top:clamp(1.4rem,2.2vw,2rem);
+  border-top:2px solid currentColor;
+}
+.backw__eq{font-family:var(--font-eyebrow);font-size:1.45rem;line-height:1.05;opacity:.45;text-align:center;}
+.backw__result{
+  font-family:var(--font-display);font-size:clamp(1.25rem,2.05vw,2.05rem);
+  line-height:1.12;letter-spacing:.0097em;margin-bottom:.45em;
+}
+.backw__note{font-size:var(--fs-small);line-height:1.4;opacity:.72;}
+@media (max-width:640px){
+  .backw__row,.backw__end{grid-template-columns:1.4rem minmax(0,1fr);}
+}
+
+.cascade{display:grid;gap:0;margin-top:clamp(2.5rem,4vw,3.6rem);max-width:70rem;text-align:left;}
+.casc{position:relative;padding:1.3rem 0 1.3rem 3.4rem;border-bottom:1px solid currentColor;}
+.casc:last-child{border-bottom:0;}
+.casc::before{
+  content:"";position:absolute;left:1rem;top:1.9rem;
+  width:9px;height:9px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;
+  transform:rotate(45deg);opacity:.7;
+}
+.casc__k{font-family:var(--font-body);font-weight:600;font-size:var(--fs-small);text-transform:uppercase;letter-spacing:.02em;margin-bottom:.4rem;}
+.casc__v{font-size:var(--fs-small);opacity:.8;}
+
+/* qué incluye (6.4) */
+.includes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(1.5rem,3vw,3rem);margin-top:clamp(2rem,3vw,3rem);text-align:left;}
+.includes li{padding:.9rem 0;border-bottom:1px solid currentColor;font-size:var(--fs-small);}
+
+/* fichas de marca (7.2–7.3) */
+.brands{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.4rem,2.6vw,2.6rem);margin-top:clamp(2.5rem,4vw,4rem);text-align:left;}
+.brandcard{display:flex;flex-direction:column;gap:1.2rem;}
+.brandcard__slot{
+  aspect-ratio:4/3;border:1px dashed currentColor;border-radius:.75rem;opacity:.55;
+  display:grid;place-items:center;text-align:center;padding:1.5rem;
+  font-family:var(--font-eyebrow);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;line-height:1.7;
+}
+/* fotografía de producto: la botella sobre el pliego */
+.brandcard__shot{
+  aspect-ratio:848/1264;overflow:hidden;border-radius:.5rem;
+  background:#8e9093;
+  box-shadow:0 18px 40px rgba(16,18,17,.16);
+}
+.brandcard__shot img{width:100%;height:100%;object-fit:cover;display:block;}
+@media(max-width:640px){.brandcard__shot{aspect-ratio:4/5;}}
+.brandcard__name{font-family:var(--font-display);font-size:clamp(1.6rem,2.6vw,2.8rem);line-height:1.1;letter-spacing:.0097em;}
+
+/* tipos de contenido (9.2–9.5) */
+.contents{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.4rem,2.6vw,2.6rem);margin-top:clamp(2.5rem,4vw,4rem);text-align:left;}
+.content-card{border-top:1px solid currentColor;padding-top:1.4rem;display:flex;flex-direction:column;gap:.9rem;align-items:flex-start;}
+.content-card__k{font-family:var(--font-eyebrow);font-weight:400;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.65;}
+.content-card__t{font-family:var(--font-display);font-size:clamp(1.3rem,2.1vw,2.2rem);line-height:1.14;letter-spacing:.0097em;}
+
+/* indicador vivo (9.5) */
+.ticker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2vw,2rem);margin-top:clamp(2.2rem,3.5vw,3.4rem);text-align:left;}
+.tick{border:1px solid currentColor;border-radius:.75rem;padding:clamp(1.2rem,2vw,1.8rem);}
+.tick__k{font-family:var(--font-eyebrow);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;opacity:.65;display:block;margin-bottom:.9rem;}
+.tick__v{font-family:var(--font-display);font-size:clamp(1.6rem,2.6vw,2.6rem);line-height:1;letter-spacing:.0097em;display:block;margin-bottom:.7rem;opacity:.45;}
+.tick__n{font-size:.9rem;opacity:.7;}
+
+/* formulario (10.3) */
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.2rem,2.2vw,2rem);max-width:62rem;margin-top:clamp(2.2rem,3.5vw,3.4rem);text-align:left;}
+.field{display:flex;flex-direction:column;gap:.6rem;}
+.field--wide{grid-column:1/-1;}
+.field--wide > .btn{align-self:flex-start;}
+.field label{font-family:var(--font-eyebrow);font-weight:400;font-size:.72rem;text-transform:uppercase;letter-spacing:.18em;opacity:.7;}
+.field label .opt{opacity:.55;letter-spacing:.1em;}
+.field input,.field select,.field textarea{
+  font:inherit;font-size:1rem;color:inherit;background:transparent;
+  border:0;border-bottom:1px solid currentColor;padding:.75rem 0;border-radius:0;
+}
+.field textarea{min-height:8rem;resize:vertical;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-bottom-width:2px;}
+.field option{color:#231f20;}
+
+/* descargas (10.4) */
+.downloads{margin-top:clamp(2.2rem,3.5vw,3.4rem);border-top:1px solid currentColor;text-align:left;max-width:64rem;}
+.downloads li{border-bottom:1px solid currentColor;}
+.downloads a{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:clamp(1rem,1.8vw,1.5rem) 0;font-size:var(--fs-lead);}
+.downloads a:hover{opacity:.72;}
+.downloads .fmt{font-family:var(--font-eyebrow);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;opacity:.6;}
+
+/* pasos del recorrido (10.2) */
+.journey{margin-top:clamp(2.2rem,3.5vw,3.4rem);text-align:left;max-width:70rem;}
+.journey li{display:grid;grid-template-columns:3.2rem 1fr;gap:1.2rem;padding:clamp(.9rem,1.6vw,1.4rem) 0;border-bottom:1px solid currentColor;font-size:var(--fs-body);}
+.journey span{font-family:var(--font-display);font-size:1.4rem;line-height:1.3;opacity:.6;letter-spacing:.06em;}
+
+@media (max-width:1100px){
+  .doors,.brands,.contents,.includes,.form-grid{grid-template-columns:1fr;}
+  .markets,.ticker{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .matrix__row{grid-template-columns:minmax(120px,1fr) repeat(3,minmax(90px,1fr));}
+}
+@media (max-width:720px){
+  .markets,.ticker{grid-template-columns:1fr;}
+}
+
+/* ---------- 14. Home ---------- */
+.band--bordeaux{background:var(--bordeaux);color:var(--stone);}
+.band--bordeaux .eyebrow,.band--bordeaux .sec__title{color:var(--stone);}
+.band--bordeaux .hand{color:#e2dfdd;}
+
+/* hero: título a la izquierda, tarjeta de pilares a la derecha */
+.hero{position:relative;isolation:isolate;color:var(--stone);background:var(--ink);}
+.hero__media{position:absolute;inset:0;z-index:-2;overflow:hidden;}
+.hero__media img{width:100%;height:100%;object-fit:cover;}
+.hero__scrim{
+  position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(100deg,rgba(16,18,17,.9) 0%,rgba(16,18,17,.72) 42%,rgba(16,18,17,.26) 74%,rgba(16,18,17,.04) 100%);
+}
+.hero__inner{
+  display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
+  gap:clamp(2rem,4vw,4.5rem);align-items:end;
+  padding:clamp(6rem,13vw,15rem) var(--gutter) clamp(4rem,7vw,8rem);
+  min-height:min(86vh,900px);
+}
+/* el título son dos frases cortas y tienen que caer en dos líneas exactas:
+   14ch estaba medido para el titular anterior y partía «negocios.» solo */
+.hero__copy .display{max-width:22ch;margin-bottom:1.8rem;}
+.hero__copy .eyebrow{color:var(--stone);opacity:.85;margin-bottom:1.8rem;max-width:40ch;}
+.hero__copy .body{margin-bottom:1.5rem;max-width:46ch;}
+.hero__copy .body--close{margin-bottom:2.6rem;}
+.hero__actions{display:flex;flex-wrap:wrap;gap:1rem;}
+.hero__actions .btn{min-width:19rem;}
+
+.pillars{
+  position:relative;background:var(--paper);color:var(--taupe);
+  border-radius:1.5rem;padding:clamp(1.4rem,2.2vw,2.4rem);
+  box-shadow:0 30px 70px rgba(16,18,17,.3);
+}
+.pillars__mark{position:absolute;top:1.6rem;right:1.7rem;width:26px;height:26px;stroke:currentColor;stroke-width:1;fill:none;opacity:.8;}
+.pillars li + li{border-top:1px solid rgba(132,122,113,.5);}
+.pillars a{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:clamp(.8rem,1.4vw,1.3rem) 0;
+  font-family:var(--font-body);font-size:clamp(1rem,1.5vw,1.6rem);line-height:1.15;
+  transition:color .2s ease;
+}
+.pillars a:hover{color:var(--bordeaux);}
+.pillars a .arrow{opacity:0;transform:translateX(-6px);transition:opacity .2s,transform .2s;}
+.pillars a:hover .arrow{opacity:1;transform:none;}
+
+/* cinco cifras sobre el pliego */
+.figures--5{grid-template-columns:repeat(5,minmax(0,1fr));}
+.figures--5 .figure__value{font-size:clamp(2.1rem,4.6vw,5.4rem);}
+.figures--5 .figure__unit{font-size:clamp(1.18rem,1.78vw,2.1rem);}
+
+.icon-sprite{position:absolute;width:0;height:0;overflow:hidden;}
+/* capacidades con icono */
+.caps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(1.2rem,2.4vw,2.6rem);margin-top:clamp(2.2rem,3.5vw,3.4rem);text-align:left;}
+.cap__icon{display:block;width:clamp(72px,5.4vw,104px);aspect-ratio:1;height:auto;margin:0 0 1.3rem;fill:var(--bordeaux);stroke:none;}
+.cap__name{font-family:var(--font-body);font-weight:600;font-size:var(--fs-small);text-transform:uppercase;letter-spacing:.02em;margin-bottom:.6rem;}
+.cap__desc{font-size:.98rem;line-height:1.35;opacity:.78;}
+
+/* tarjetas de solución */
+.solutions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.2rem,2vw,2rem);margin-top:clamp(2.5rem,4vw,4rem);text-align:left;}
+.solution{display:flex;flex-direction:column;border:1px solid rgba(132,122,113,.5);border-radius:1.25rem;overflow:hidden;transition:border-color .3s ease,transform .3s ease;}
+.solution:hover{border-color:var(--bordeaux);transform:translateY(-4px);}
+.solution__media{aspect-ratio:16/10;overflow:hidden;background:rgba(132,122,113,.25);}
+.solution__media img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+.solution:hover .solution__media img{transform:scale(1.04);}
+.solution__body{padding:clamp(1.4rem,2.4vw,2.6rem);display:flex;flex-direction:column;gap:1rem;align-items:flex-start;}
+.solution__title{font-family:var(--font-display);font-size:clamp(1.3rem,2.1vw,2.2rem);line-height:1.12;letter-spacing:.0097em;}
+.solution__desc{font-size:var(--fs-small);line-height:1.35;}
+
+/* tapa del libro · ahora es la tapa real, no el marcador tipográfico.
+   La sombra se conserva: sobre la franja bordó es lo que la despega del fondo
+   y la hace leer como un objeto y no como una imagen pegada. */
+.book{
+  display:block;width:100%;max-width:26rem;height:auto;
+  box-shadow:0 24px 60px rgba(16,18,17,.45);
+}
+
+@media (max-width:1100px){
+  .hero__inner{grid-template-columns:1fr;}
+  .pillars{order:-1;margin-bottom:2rem;}
+  .caps,.figures--5{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .solutions{grid-template-columns:1fr;}
+}
+@media (max-width:720px){
+  .caps,.figures--5{grid-template-columns:1fr;}
+  .hero__actions{flex-direction:column;align-items:stretch;}
+  .hero__actions .btn{min-width:100%;}
+}
+
+/* ---------- 15. Patrones del rediseño (How We Build, 27/08) ---------- */
+
+/* bloque de sección: eyebrow + título grande a la izquierda, texto a la derecha */
+.blk{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(2rem,4vw,5.5rem);align-items:start;}
+.blk__head{}
+.blk__body{padding-top:.6rem;}
+.blk--wide{grid-template-columns:minmax(0,1.05fr) minmax(0,.75fr);}
+
+/* cifra grande junto al título */
+.bignum{
+  font-family:var(--font-display);
+  font-size:clamp(3rem,7.34vw,8.8125rem);   /* 141 px sobre 1920 */
+  line-height:1.163;letter-spacing:.0039em;
+  color:var(--claret);display:block;
+}
+.band--taupe .bignum,.band--green .bignum,.band--ink .bignum,
+.band--charcoal .bignum,.band--photo .bignum,.band--bordeaux .bignum{color:#e2dfdd;}
+.bignum__label{
+  font-family:var(--font-display);
+  font-size:clamp(1.4rem,2.6vw,3.2rem);line-height:1.09;letter-spacing:.0097em;
+  color:var(--taupe);max-width:19ch;margin-top:.4rem;
+}
+.band--taupe .bignum__label,.band--ink .bignum__label,.band--charcoal .bignum__label,
+.band--photo .bignum__label,.band--bordeaux .bignum__label{color:var(--stone);}
+
+/* sub-navegación de Soluciones */
+.subnav{
+  display:flex;flex-wrap:wrap;gap:clamp(.9rem,2vw,2.2rem);align-items:center;
+  padding:1.1rem var(--gutter);
+  background:var(--paper);border-bottom:1px solid rgba(134,122,112,.2);
+}
+.subnav__home{
+  font-family:var(--font-eyebrow);font-weight:400;font-size:.72rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--taupe);opacity:.6;
+  display:inline-flex;align-items:center;gap:.6rem;cursor:pointer;
+}
+.subnav__home:hover{opacity:1;}
+.subnav a:not(.subnav__home){
+  font-family:var(--font-body);font-weight:500;font-size:var(--fs-small);
+  color:var(--taupe);cursor:pointer;padding-bottom:3px;border-bottom:1px solid transparent;
+}
+.subnav a:not(.subnav__home):hover{border-bottom-color:var(--bordeaux);}
+.subnav a[aria-current="page"]{border-bottom-color:var(--claret);font-weight:600;}
+
+/* fotografía dentro de un bloque */
+.blk__photo img{width:100%;height:auto;border-radius:.5rem;}
+.blk__photo figcaption{margin-top:.9rem;font-size:.92rem;opacity:.72;}
+
+/* ---------- 12. Responsive ---------- */
+@media (max-width:1100px){
+  .split,.rule-list li,.blk,.blk--wide{grid-template-columns:1fr;}
+  .figures,.tiers{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .step{border-bottom:1px solid currentColor;}
+  .compare__row{grid-template-columns:1fr;gap:.6rem;}
+  .compare__head{display:none;}
+  .compare__cell::before{content:attr(data-who) " · ";font-family:var(--font-eyebrow);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;}
+  .photo--polaroid{max-width:26rem;}
+  .footer__cols{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:1239px){
+  .site-nav{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;gap:0;background:var(--paper);
+    padding:1rem var(--gutter) 1.6rem;border-bottom:1px solid rgba(132,122,113,.16);
+  }
+  .site-nav[data-open="true"]{display:flex;}
+  .site-nav a{padding:.75rem 0;font-size:.95rem;}
+  .navitem{flex-wrap:wrap;width:100%;justify-content:flex-start;}
+  .drop{
+    position:static;opacity:1;visibility:visible;transform:none;
+    width:100%;min-width:0;border:0;box-shadow:none;background:none;
+    padding:0 0 .4rem 1.2rem;display:none;
+    border-left:1px solid rgba(134,122,112,.3);margin-left:.2rem;
+  }
+  .langs{padding:.9rem 0 0;}
+  .navitem[data-open="true"] .drop{display:block;}
+  .drop a{padding:.5rem 0;}
+  .nav-toggle{
+    display:inline-flex;align-items:center;gap:.6rem;background:none;border:0;cursor:pointer;
+    font:inherit;color:inherit;font-family:var(--font-eyebrow);font-size:.8rem;
+    text-transform:uppercase;letter-spacing:.11em;
+  }
+  .figures,.tiers,.steps,.gauge__row{grid-template-columns:1fr;}
+  .btn{min-width:100%;}
+  .footer__base{flex-direction:column;}
+}
+@media print{
+  .site-header,.site-nav{display:none;}
+  .page[hidden]{display:block!important;}
+}
+
+/* ---------- 14. Aparición de los titulares al entrar en pantalla ----------
+   El estado oculto solo existe si el script de la cabecera pudo poner
+   .js-reveal en <html>: sin JS, con IntersectionObserver ausente o con
+   prefers-reduced-motion, los titulares se ven siempre. Ese script además
+   quita la clase a los 4 s si el observador nunca arrancó, así ningún
+   fallo puede dejar un titular invisible. */
+@media (prefers-reduced-motion:no-preference){
+  .js-reveal .reveal{opacity:0;transform:translateY(15px);will-change:opacity,transform;}
+  .js-reveal .reveal.is-in{
+    opacity:1;transform:none;will-change:auto;
+    transition:opacity .85s cubic-bezier(.22,.61,.36,1),transform .85s cubic-bezier(.22,.61,.36,1);
+  }
+  .js-reveal .reveal--d1.is-in{transition-delay:.12s;}
+}
+
+/* ---------- Corrección responsive · 14/09 -------------------------------
+   El bloque de «Dónde estamos» y el de cifras de Bulk Wine llevaban el número
+   de columnas escrito en la etiqueta (style="grid-template-columns:…"). Un
+   estilo puesto ahí le gana a la hoja, así que las reglas de móvil no se
+   aplicaban nunca: las tres columnas de contacto seguían a 107 px en una
+   pantalla de 430 y el correo se desbordaba encima de la columna de Visitas.
+   Ahora el ancho lo decide la hoja, que es donde se puede corregir.          */
+
+.markets--tres{grid-template-columns:repeat(3,minmax(0,1fr));}
+.figures--dos{grid-template-columns:repeat(2,minmax(0,1fr));max-width:62rem;}
+
+@media (max-width:720px){
+  .markets--tres,.figures--dos{grid-template-columns:1fr;}
+}
+
+/* Un correo es una sola palabra sin espacios: más angosto que él, no se parte,
+   se desborda. Con esto se corta donde haga falta en vez de invadir la columna
+   vecina — la red de seguridad para cualquier dirección larga que venga. */
+.market li,.market a{overflow-wrap:anywhere;}

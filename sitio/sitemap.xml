@@ -1,13 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://corbeauwines.com/es/</loc><priority>0.9</priority></url>
-  <url><loc>https://corbeauwines.com/es/analisis/</loc><priority>0.7</priority></url>
-  <url><loc>https://corbeauwines.com/es/analisis/malbec-a-12-grados/</loc><priority>0.6</priority></url>
-  <url><loc>https://corbeauwines.com/es/analisis/malbec-de-calidad-en-flexitank/</loc><priority>0.6</priority></url>
-  <url><loc>https://corbeauwines.com/es/analisis/que-cuesta-un-malbec-a-granel/</loc><priority>0.6</priority></url>
-  <url><loc>https://corbeauwines.com/en/</loc><priority>0.9</priority></url>
-  <url><loc>https://corbeauwines.com/en/insights/</loc><priority>0.7</priority></url>
-  <url><loc>https://corbeauwines.com/en/insights/high-quality-malbec-in-flexitank/</loc><priority>0.6</priority></url>
-  <url><loc>https://corbeauwines.com/en/insights/malbec-at-12-abv/</loc><priority>0.6</priority></url>
-  <url><loc>https://corbeauwines.com/en/insights/what-does-bulk-malbec-cost/</loc><priority>0.6</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://corbeauwines.com/es/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/que-nos-diferencia/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/que-nos-diferencia/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/why-corbeau/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/como-construimos/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/como-construimos/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/how-we-build/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/soluciones/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/soluciones/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/solutions/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/soluciones/vino-a-granel/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/soluciones/vino-a-granel/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/solutions/bulk-wine/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/soluciones/private-label/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/soluciones/private-label/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/solutions/private-label/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/soluciones/marcas-propias/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/soluciones/marcas-propias/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/solutions/own-brands/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/soluciones/desarrollo-de-producto/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/soluciones/desarrollo-de-producto/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/solutions/product-development/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/marcas/p1xels/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/marcas/p1xels/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/brands/p1xels/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/marcas/mad-bird/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/marcas/mad-bird/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/brands/mad-bird/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/contacto/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/contacto/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/contact/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/why-corbeau/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/que-nos-diferencia/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/why-corbeau/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/how-we-build/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/como-construimos/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/how-we-build/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/solutions/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/soluciones/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/solutions/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/solutions/bulk-wine/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/soluciones/vino-a-granel/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/solutions/bulk-wine/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/solutions/private-label/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/soluciones/private-label/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/solutions/private-label/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/solutions/own-brands/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/soluciones/marcas-propias/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/solutions/own-brands/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/solutions/product-development/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/soluciones/desarrollo-de-producto/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/solutions/product-development/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/brands/p1xels/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/marcas/p1xels/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/brands/p1xels/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/brands/mad-bird/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/marcas/mad-bird/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/brands/mad-bird/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/contacto/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/contact/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/analisis/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/analisis/malbec-a-12-grados/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/malbec-a-12-grados/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/malbec-at-12-abv/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/analisis/malbec-de-calidad-en-flexitank/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/malbec-de-calidad-en-flexitank/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/high-quality-malbec-in-flexitank/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/analisis/que-cuesta-un-malbec-a-granel/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/que-cuesta-un-malbec-a-granel/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/what-does-bulk-malbec-cost/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/insights/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/insights/high-quality-malbec-in-flexitank/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/high-quality-malbec-in-flexitank/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/malbec-de-calidad-en-flexitank/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/insights/malbec-at-12-abv/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/malbec-at-12-abv/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/malbec-a-12-grados/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/insights/what-does-bulk-malbec-cost/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/what-does-bulk-malbec-cost/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/que-cuesta-un-malbec-a-granel/"/>
+  </url>
 </urlset>
