@@ -92,6 +92,14 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/"/>
   </url>
+  <url><loc>https://corbeauwines.com/es/analisis/blancos-argentinos/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/blancos-argentinos/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/argentine-whites/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/analisis/continuidad-entre-cosechas/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/continuidad-entre-cosechas/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/consistency-across-vintages/"/>
+  </url>
   <url><loc>https://corbeauwines.com/es/analisis/malbec-a-12-grados/</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/malbec-a-12-grados/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/malbec-at-12-abv/"/>
@@ -99,6 +107,10 @@
   <url><loc>https://corbeauwines.com/es/analisis/malbec-de-calidad-en-flexitank/</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/malbec-de-calidad-en-flexitank/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/high-quality-malbec-in-flexitank/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/es/analisis/marca-privada-de-vino/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/marca-privada-de-vino/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/private-label-wine/"/>
   </url>
   <url><loc>https://corbeauwines.com/es/analisis/que-cuesta-un-malbec-a-granel/</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/que-cuesta-un-malbec-a-granel/"/>
@@ -108,6 +120,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/"/>
   </url>
+  <url><loc>https://corbeauwines.com/en/insights/argentine-whites/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/argentine-whites/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/blancos-argentinos/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/insights/consistency-across-vintages/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/consistency-across-vintages/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/continuidad-entre-cosechas/"/>
+  </url>
   <url><loc>https://corbeauwines.com/en/insights/high-quality-malbec-in-flexitank/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/high-quality-malbec-in-flexitank/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/malbec-de-calidad-en-flexitank/"/>
@@ -115,6 +135,10 @@
   <url><loc>https://corbeauwines.com/en/insights/malbec-at-12-abv/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/malbec-at-12-abv/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/malbec-a-12-grados/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/en/insights/private-label-wine/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/private-label-wine/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/marca-privada-de-vino/"/>
   </url>
   <url><loc>https://corbeauwines.com/en/insights/what-does-bulk-malbec-cost/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/what-does-bulk-malbec-cost/"/>
