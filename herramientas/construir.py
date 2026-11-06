@@ -8,9 +8,13 @@ Entrada:
   fuente/plantilla.articulo.<idioma>.html
   fuente/plantilla.indice.<idioma>.html
 
-Salida:
-  sitio/es/analisis/<slug>/index.html  y su índice
-  sitio/en/insights/<slug>/index.html  y su índice
+Salida, una carpeta por idioma:
+  sitio/es/analisis/<slug>/index.html   y su índice
+  sitio/en/insights/<slug>/index.html   y su índice
+  sitio/pt/analises/<slug>/index.html   y su índice
+
+Las tres versiones de una nota se reconocen por el campo «clave», que es el
+mismo en los tres archivos; el «slug» puede ser distinto en cada idioma.
 
 Se puede correr las veces que haga falta: siempre produce lo mismo. Después
 conviene correr herramientas/armar.py, que regenera el sitemap con las notas
@@ -29,7 +33,11 @@ import articulos as A
 
 FLECHA = ('<svg viewBox="0 0 19 14" aria-hidden="true">'
           '<path d="M0 7h18M12 1l6 6-6 6"/></svg>')
-LEER = {'es': 'Leer la nota', 'en': 'Read the piece'}
+LEER = {'es': 'Leer la nota', 'en': 'Read the piece', 'pt': 'Ler a nota'}
+VOLVER = {'es': 'Volver a Análisis', 'en': 'Back to Insights', 'pt': 'Voltar para Análises'}
+OTRO_IDIOMA = {'es': {'en': 'Leer en inglés', 'pt': 'Leer en portugués'},
+               'en': {'es': 'Read in Spanish', 'pt': 'Read in Portuguese'},
+               'pt': {'es': 'Ler em espanhol', 'en': 'Ler em inglês'}}
 INDICE_SEO = {
     'es': ('Análisis · Corbeau Wines',
            'Análisis desde el origen: mercado, costos, normativa y producción de '
@@ -37,6 +45,9 @@ INDICE_SEO = {
     'en': ('Insights · Corbeau Wines',
            'Analysis from the origin: market, costs, regulation and production of '
            'Argentine wine. Corbeau Wines.'),
+    'pt': ('Análises · Corbeau Wines',
+           'Análises desde a origem: mercado, custos, regulamentação e produção de '
+           'vinho argentino. Corbeau Wines.'),
 }
 
 
@@ -51,19 +62,47 @@ def notas(idioma):
     return salida
 
 
+def hermanas(clave, idioma):
+    """La misma nota en los otros idiomas: {idioma: slug}. Las notas se
+    emparejan por el campo «clave», no por el nombre del archivo."""
+    salida = {}
+    for i in A.otros(idioma):
+        for d in notas(i):
+            if d['clave'] == clave:
+                salida[i] = d['slug']
+    return salida
+
+
 def armar_articulo(datos, idioma):
     plantilla = open(os.path.join(A.FUENTE, 'plantilla.articulo.%s.html' % idioma),
                      encoding='utf-8').read()
     e = lambda s: html.escape(s, quote=False)
     cuerpo = '\n'.join('      ' + b for b in A.cuerpo_html(datos, idioma))
-    p = plantilla.replace('{{seo}}', A.seo(datos, idioma, datos['par']))
+    pares = hermanas(datos['clave'], idioma)
+    p = plantilla.replace('{{seo}}', A.seo(datos, idioma, pares))
     p = p.replace('{{volanta}}', e(datos['volanta']))
     p = p.replace('{{titulo}}', e(datos['titulo']))
     p = p.replace('{{bajada}}', e(datos['bajada']))
     p = p.replace('{{fecha}}', A.fecha_larga(idioma, datos['fecha']))
     p = p.replace('{{cuerpo}}', cuerpo)
-    p = p.replace('{{par}}', '../../../%s/%s/%s/'
-                  % (A.OTRO[idioma], A.IDIOMA[A.OTRO[idioma]]['carpeta'], datos['par']))
+    rel = lambda i: '../../../%s/%s/%s/' % (i, A.IDIOMA[i]['carpeta'], pares[i])
+    sel = []
+    # una nota puede estar todavía en dos idiomas y no en los tres: el selector
+    # muestra solamente los que existen
+    for i in [x for x in A.IDIOMAS if x == idioma or x in pares]:
+        if sel:
+            sel.append('<span class="langs__sep" aria-hidden="true">·</span>')
+        if i == idioma:
+            sel.append('<b class="langs__on" aria-current="true">%s</b>' % A.ROTULO[i])
+        else:
+            sel.append('<a class="langs__alt" href="%s" hreflang="%s" lang="%s">%s</a>'
+                       % (rel(i), A.HREFLANG[i], A.HREFLANG[i], A.ROTULO[i]))
+    p = p.replace('{{idiomas}}', ''.join(sel))
+    cierre = '\n    '.join(
+        '<a href="%s" hreflang="%s">%s %s</a>'
+        % (rel(i), A.HREFLANG[i], OTRO_IDIOMA[idioma][i], FLECHA)
+        for i in A.otros(idioma) if i in pares)
+    p = p.replace('{{cierre}}', cierre)
     sobra = re.findall(r'\{\{[^}]*\}\}', p)
     if sobra:
         raise SystemExit('Marcadores sin resolver en %s/%s: %s'
@@ -91,30 +130,42 @@ def armar_indice(lista, idioma):
                           LEER[idioma], FLECHA))
     titulo, descripcion = INDICE_SEO[idioma]
     propia = A.DOMINIO + A.ruta(idioma)
-    otra = A.DOMINIO + A.ruta(A.OTRO[idioma])
     seo = '\n'.join([
         '<title>%s</title>' % titulo,
         '<meta name="description" content="%s">' % html.escape(descripcion, quote=True),
         '<link rel="canonical" href="%s">' % propia,
-        '<link rel="alternate" hreflang="%s" href="%s">' % (idioma, propia),
-        '<link rel="alternate" hreflang="%s" href="%s">' % (A.OTRO[idioma], otra),
+    ] + [
+        '<link rel="alternate" hreflang="%s" href="%s">'
+        % (A.HREFLANG[i], A.DOMINIO + A.ruta(i)) for i in A.IDIOMAS
+    ] + [
         '<link rel="stylesheet" href="../../assets/analisis.css">',
     ])
-    p = plantilla.replace('{{seo}}', seo).replace('{{listado}}', '\n'.join(piezas))
+    sel = []
+    for i in A.IDIOMAS:
+        if sel:
+            sel.append('<span class="langs__sep" aria-hidden="true">·</span>')
+        if i == idioma:
+            sel.append('<b class="langs__on" aria-current="true">%s</b>' % A.ROTULO[i])
+        else:
+            sel.append('<a class="langs__alt" href="../../%s/%s/" hreflang="%s" lang="%s">%s</a>'
+                       % (i, A.IDIOMA[i]['carpeta'], A.HREFLANG[i], A.HREFLANG[i], A.ROTULO[i]))
+    p = (plantilla.replace('{{seo}}', seo).replace('{{listado}}', '\n'.join(piezas))
+         .replace('{{idiomas}}', ''.join(sel)))
     destino = os.path.join(A.SITIO, idioma, A.IDIOMA[idioma]['carpeta'], 'index.html')
     open(destino, 'w', encoding='utf-8').write(p)
     return destino, len(p.encode())
 
 
 if __name__ == '__main__':
-    for idioma in ('es', 'en'):
+    for idioma in A.IDIOMAS:
         lista = notas(idioma)
-        pares = {d['slug']: d['par'] for d in lista}
-        otros = {d['slug'] for d in notas(A.OTRO[idioma])}
-        for slug, par in pares.items():
-            if par not in otros:
-                raise SystemExit('La nota %s dice que su par es %s, que no existe en %s'
-                                 % (slug, par, A.OTRO[idioma]))
+        for d in lista:
+            faltan = [i for i in A.otros(idioma)
+                      if not any(x['clave'] == d['clave'] for x in notas(i))]
+            if faltan:
+                # no es un error: una nota puede publicarse en dos idiomas y
+                # traducirse al tercero más adelante
+                print('  aviso: «%s» todavía no está en %s' % (d['slug'], ', '.join(faltan)))
         for d in lista:
             destino, peso = armar_articulo(d, idioma)
             print('%-62s %5.1f KB' % (os.path.relpath(destino, A.REPO), peso / 1024))
