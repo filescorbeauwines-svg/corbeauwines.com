@@ -1,6 +1,6 @@
 ---
+clave: continuidad
 slug: consistency-across-vintages
-par: continuidad-entre-cosechas
 volanta: Continuity
 titulo: How can a wine maintain its style from one vintage to the next?
 bajada: From vineyard management to assessing the new vintage: how continuity gets built into a wine, and what a buyer should agree with their supplier.

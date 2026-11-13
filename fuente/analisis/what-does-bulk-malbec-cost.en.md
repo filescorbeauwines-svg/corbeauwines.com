@@ -1,6 +1,6 @@
 ---
+clave: granel-precio
 slug: what-does-bulk-malbec-cost
-par: que-cuesta-un-malbec-a-granel
 volanta: How buying works
 titulo: What does bulk Malbec cost? It depends which Malbec
 bajada: Three buyers can ask for exactly the same thing and need three different wines. This piece is about working out which one is yours before comparing a figure.

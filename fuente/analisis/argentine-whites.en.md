@@ -1,6 +1,6 @@
 ---
+clave: blancos
 slug: argentine-whites
-par: blancos-argentinos
 volanta: Range
 titulo: Argentine whites: what to look at before adding a new listing
 bajada: Variety, style, channel and supply format: the decisions that turn a category opportunity into a concrete commercial proposition.

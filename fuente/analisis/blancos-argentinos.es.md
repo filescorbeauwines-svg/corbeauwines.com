@@ -1,6 +1,6 @@
 ---
+clave: blancos
 slug: blancos-argentinos
-par: argentine-whites
 volanta: Surtido
 titulo: Blancos argentinos: qué mirar antes de sumar una nueva referencia
 bajada: Variedad, estilo, canal y modalidad de suministro: las decisiones que convierten una oportunidad de categoría en una propuesta comercial concreta.

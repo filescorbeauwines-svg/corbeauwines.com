@@ -31,11 +31,21 @@ FUENTE = os.path.join(REPO, 'fuente')
 
 DATOS = json.load(open(os.path.join(FUENTE, 'paginas.json'), encoding='utf-8'))
 DOMINIO = DATOS['sitio']
-IDIOMAS = ('es', 'en')
-OTRO = {'es': 'en', 'en': 'es'}
-LOCALE = {'es': 'es_AR', 'en': 'en_US'}
+IDIOMAS = ('es', 'en', 'pt')
+# el español es el idioma por defecto: es el que ve quien llega sin preferencia
+PREDETERMINADO = 'es'
+LOCALE = {'es': 'es_AR', 'en': 'en_US', 'pt': 'pt_BR'}
+# la etiqueta de idioma que entiende Google: pt-BR es portugués de Brasil
+HREFLANG = {'es': 'es', 'en': 'en', 'pt': 'pt-BR'}
+ROTULO = {'es': 'ES', 'en': 'EN', 'pt': 'PT'}
+
+
+def otros(idioma):
+    return [i for i in IDIOMAS if i != idioma]
 # las páginas que cuelgan de Soluciones: en el menú marcan «Soluciones»
 HIJAS = {'bulk', 'private', 'marcas', 'desarrollo', 'pixels', 'madbird'}
+# la carpeta de la sección de notas en cada idioma
+CARPETA = {'es': 'analisis', 'en': 'insights', 'pt': 'analises'}
 
 SPRITE = open(os.path.join(FUENTE, 'sprite.svg'), encoding='utf-8').read()
 SIMBOLOS = {m.group(1): m.group(0) for m in
@@ -85,15 +95,18 @@ def sprite_para(texto):
 def bloque_seo(idioma, clave, imagen):
     d = DATOS[idioma][clave]
     propia = DOMINIO + d['url']
-    par = DOMINIO + url(OTRO[idioma], clave)
     e = lambda s: html.escape(s, quote=True)
     L = [
         '<title>%s</title>' % e(d['titulo']),
         '<meta name="description" content="%s">' % e(d['descripcion']),
         '<link rel="canonical" href="%s">' % propia,
-        '<link rel="alternate" hreflang="%s" href="%s">' % (idioma, propia),
-        '<link rel="alternate" hreflang="%s" href="%s">' % (OTRO[idioma], par),
-        '<link rel="alternate" hreflang="x-default" href="%s">' % (DOMINIO + url('es', clave)),
+    ]
+    for i in IDIOMAS:
+        L.append('<link rel="alternate" hreflang="%s" href="%s">'
+                 % (HREFLANG[i], DOMINIO + url(i, clave)))
+    L += [
+        '<link rel="alternate" hreflang="x-default" href="%s">'
+        % (DOMINIO + url(PREDETERMINADO, clave)),
         '<meta property="og:type" content="website">',
         '<meta property="og:site_name" content="Corbeau Wines">',
         '<meta property="og:locale" content="%s">' % LOCALE[idioma],
@@ -120,6 +133,21 @@ def redireccion(idioma):
             '(function(){var m=%s;var k=(location.hash||"").slice(1);'
             'if(m[k])location.replace(m[k]);})();\n</script>\n' %
             json.dumps(mapa, ensure_ascii=False))
+
+
+def selector_idiomas(idioma, clave):
+    """ES · EN · PT, con el idioma actual en negrita y los otros como enlace a
+    la misma página traducida."""
+    partes = []
+    for i in IDIOMAS:
+        if partes:
+            partes.append('<span class="langs__sep" aria-hidden="true">·</span>')
+        if i == idioma:
+            partes.append('<b class="langs__on" aria-current="true">%s</b>' % ROTULO[i])
+        else:
+            partes.append('<a class="langs__alt" href="%s" hreflang="%s" lang="%s">%s</a>'
+                          % (url(i, clave), HREFLANG[i], HREFLANG[i], ROTULO[i]))
+    return ''.join(partes)
 
 
 def marcar_menu(pagina, idioma, clave):
@@ -150,7 +178,7 @@ def armar_pagina(idioma, clave):
     p = p.replace('{{sprite}}', sprite_para(p))
     p = p.replace('{{seo}}', bloque_seo(idioma, clave, imagen))
     p = p.replace('{{redireccion}}', redireccion(idioma) if clave == 'home' else '')
-    p = p.replace('{{url_par}}', url(OTRO[idioma], clave))
+    p = p.replace('{{idiomas}}', selector_idiomas(idioma, clave))
     p = resolver(p, idioma)
     p = marcar_menu(p, idioma, clave)
     sobra = re.findall(r'\{\{[^}]*\}\}', p)
@@ -166,8 +194,8 @@ def armar_pagina(idioma, clave):
 # enlaces al archivo de una sola página (../../index.html#why)
 def ajustar_analisis():
     tocadas = 0
-    for idioma, carpeta in (('es', 'analisis'), ('en', 'insights')):
-        base = os.path.join(SITIO, idioma, carpeta)
+    for idioma in IDIOMAS:
+        base = os.path.join(SITIO, idioma, CARPETA[idioma])
         for raiz, _, archivos in os.walk(base):
             for f in archivos:
                 if f != 'index.html':
@@ -197,8 +225,8 @@ def sitemap():
             E.append('  </url>')
             n += 1
     # Análisis: índice y artículos, con su par tomado de su propio hreflang
-    for idioma, carpeta in (('es', 'analisis'), ('en', 'insights')):
-        base = os.path.join(SITIO, idioma, carpeta)
+    for idioma in IDIOMAS:
+        base = os.path.join(SITIO, idioma, CARPETA[idioma])
         for raiz, _, archivos in sorted(os.walk(base)):
             if 'index.html' not in archivos:
                 continue

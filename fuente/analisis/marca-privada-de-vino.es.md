@@ -1,6 +1,6 @@
 ---
+clave: marca-privada
 slug: marca-privada-de-vino
-par: private-label-wine
 volanta: Marca privada
 titulo: Marca privada de vino: cómo convertir el primer pedido en un negocio duradero
 bajada: Una referencia exclusiva puede volverse un activo propio. Lo que decide si llega a serlo se acuerda entre el comprador y la bodega, y empieza antes del primer contenedor.

@@ -1,6 +1,6 @@
 ---
+clave: continuidad
 slug: continuidad-entre-cosechas
-par: consistency-across-vintages
 volanta: Continuidad
 titulo: La cosecha cambia. ¿Cómo se mantiene el estilo de un vino?
 bajada: Del manejo del viñedo a la evaluación de la nueva cosecha: cómo se construye la continuidad de un vino y qué debería acordar un comprador con su proveedor.

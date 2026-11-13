@@ -1,6 +1,6 @@
 ---
+clave: granel-precio
 slug: que-cuesta-un-malbec-a-granel
-par: what-does-bulk-malbec-cost
 volanta: Cómo se compra
 titulo: ¿Cuánto cuesta un Malbec a granel? Depende de qué Malbec
 bajada: Tres compradores pueden pedir exactamente lo mismo y necesitar tres vinos distintos. Esta nota trata de cómo saber cuál es el suyo antes de comparar una cifra.

@@ -1,6 +1,6 @@
 ---
+clave: flexitank
 slug: malbec-de-calidad-en-flexitank
-par: high-quality-malbec-in-flexitank
 volanta: Transporte
 titulo: Malbec de alta calidad en flexitank: qué respalda la investigación
 bajada: Que el flexitank degrada el vino es una de las creencias más instaladas del negocio. Un estudio con más de un millón de litros transportados durante quince meses permite ponerla a prueba, y conviene ser preciso sobre qué demuestra y qué no.

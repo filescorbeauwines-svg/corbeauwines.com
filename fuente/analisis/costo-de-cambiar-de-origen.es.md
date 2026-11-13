@@ -107,8 +107,9 @@ Supuestos aritméticos, no tarifas de mercado ni costos regulatorios. Para aisla
 
 El resultado depende del volumen efectivamente ejecutado, no solo de la previsión anual. Conviene no multiplicar el ahorro por un volumen proyectado si la oportunidad consiste en un lote, o si no hay base para suponer que se repetirá. La sensibilidad importa tanto como el resultado. Con 120.000 litros y los mismos 6.500 euros de transición, el beneficio cambia de signo según el ahorro neto.
 
-| 0,04 €/l | −1.700 € |
+| Ahorro neto por litro | Beneficio incremental |
 | --- | --- |
+| 0,04 €/l | −1.700 € |
 | 0,08 €/l | 3.100 € |
 | 0,12 €/l | 7.900 € |
 

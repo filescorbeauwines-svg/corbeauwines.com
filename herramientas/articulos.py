@@ -8,8 +8,9 @@ significa cada marca, y cómo se convierte en HTML y de vuelta.
 El formato, completo:
 
     ---
+    clave: granel-precio                 la misma nota en los otros idiomas
+                                          lleva esta misma clave
     slug: que-cuesta-un-malbec-a-granel   dirección de la nota
-    par: what-does-bulk-malbec-cost       la misma nota en el otro idioma
     volanta: Cómo se compra               la línea chica de arriba del título
     titulo: ...
     bajada: ...                           el resumen; también es la descripción
@@ -62,8 +63,20 @@ IDIOMA = {
            'fuente': 'Source', 'publicado': 'Published %-d %s %Y',
            'meses': ['January', 'February', 'March', 'April', 'May', 'June', 'July',
                      'August', 'September', 'October', 'November', 'December']},
+    'pt': {'carpeta': 'analises', 'seccion': 'Análises',
+           'origen': 'Desde a origem', 'modelo': 'Modelo de consulta',
+           'fuente': 'Fonte', 'publicado': 'Publicado em %-d de %s de %Y',
+           'meses': ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho',
+                     'agosto', 'setembro', 'outubro', 'novembro', 'dezembro']},
 }
-OTRO = {'es': 'en', 'en': 'es'}
+IDIOMAS = ('es', 'en', 'pt')
+PREDETERMINADO = 'es'
+HREFLANG = {'es': 'es', 'en': 'en', 'pt': 'pt-BR'}
+ROTULO = {'es': 'ES', 'en': 'EN', 'pt': 'PT'}
+
+
+def otros(idioma):
+    return [i for i in IDIOMAS if i != idioma]
 
 
 def ruta(idioma, slug=None):
@@ -74,8 +87,11 @@ def ruta(idioma, slug=None):
 def fecha_larga(idioma, iso):
     a, m, d = (int(x) for x in iso.split('-'))
     mes = IDIOMA[idioma]['meses'][m - 1]
-    return ('Publicado el %d de %s de %d' % (d, mes, a) if idioma == 'es'
-            else 'Published %d %s %d' % (d, mes, a))
+    if idioma == 'es':
+        return 'Publicado el %d de %s de %d' % (d, mes, a)
+    if idioma == 'pt':
+        return 'Publicado em %d de %s de %d' % (d, mes, a)
+    return 'Published %d %s %d' % (d, mes, a)
 
 
 # --- leer un artículo -------------------------------------------------------
@@ -90,7 +106,7 @@ def leer(ruta_md):
         if ':' in linea:
             k, v = linea.split(':', 1)
             datos[k.strip()] = v.strip()
-    faltan = [k for k in ('slug', 'par', 'volanta', 'titulo', 'bajada', 'fecha')
+    faltan = [k for k in ('clave', 'slug', 'volanta', 'titulo', 'bajada', 'fecha')
               if k not in datos]
     if faltan:
         raise SystemExit('Faltan datos en %s: %s' % (ruta_md, ', '.join(faltan)))
@@ -185,16 +201,19 @@ def tabla_html(bloque):
 
 # --- la parte de la cabecera que ve Google ---------------------------------
 
-def seo(datos, idioma, par):
+def seo(datos, idioma, hermanas):
+    """hermanas: {idioma: slug} de la misma nota en los otros idiomas."""
     e = lambda s: html.escape(s, quote=True)
     propia = DOMINIO + ruta(idioma, datos['slug'])
-    otra = DOMINIO + ruta(OTRO[idioma], datos['par'])
     L = [
         '<title>%s · Corbeau Wines</title>' % e(datos['titulo']),
         '<meta name="description" content="%s">' % e(datos['bajada']),
         '<link rel="canonical" href="%s">' % propia,
-        '<link rel="alternate" hreflang="%s" href="%s">' % (idioma, propia),
-        '<link rel="alternate" hreflang="%s" href="%s">' % (OTRO[idioma], otra),
+        '<link rel="alternate" hreflang="%s" href="%s">' % (HREFLANG[idioma], propia),
+    ] + [
+        '<link rel="alternate" hreflang="%s" href="%s">'
+        % (HREFLANG[i], DOMINIO + ruta(i, hermanas[i])) for i in sorted(hermanas)
+    ] + [
         '<meta property="og:type" content="article">',
         '<meta property="og:title" content="%s">' % e(datos['titulo']),
         '<meta property="og:description" content="%s">' % e(datos['bajada']),

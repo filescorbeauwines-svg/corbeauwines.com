@@ -107,8 +107,9 @@ Arithmetic assumptions, not market rates or regulatory costs. To isolate the eff
 
 The result depends on the actual volume switched, not on the annual projection alone. Best not to multiply the saving by a projected volume if the opportunity is a single lot, or if there is no basis for assuming it repeats. Sensitivity matters as much as the result. At 120,000 litres and the same €6,500 of transition, the benefit changes sign according to the net saving.
 
-| €0.04/l | −€1,700 |
+| Net saving per litre | Incremental benefit |
 | --- | --- |
+| €0.04/l | −€1,700 |
 | €0.08/l | €3,100 |
 | €0.12/l | €7,900 |
 

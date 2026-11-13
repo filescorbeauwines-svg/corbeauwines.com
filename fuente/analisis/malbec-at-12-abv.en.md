@@ -1,6 +1,6 @@
 ---
+clave: reino-unido
 slug: malbec-at-12-abv
-par: malbec-a-12-grados
 volanta: UK market
 titulo: Malbec at 12% ABV: forty-six pence a litre
 bajada: Since February 2025 the UK has taxed wine on the alcohol it actually contains. That single decision changed what buyers ask us for, and what we ask of the vineyard.

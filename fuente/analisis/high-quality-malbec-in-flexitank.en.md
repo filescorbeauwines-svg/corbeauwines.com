@@ -1,6 +1,6 @@
 ---
+clave: flexitank
 slug: high-quality-malbec-in-flexitank
-par: malbec-de-calidad-en-flexitank
 volanta: Transport
 titulo: High-quality Malbec in flexitank: what the research supports
 bajada: That flexitank degrades wine is one of the most entrenched beliefs in the trade. A study covering more than a million litres shipped across fifteen months lets us test it — and it is worth being precise about what it proves and what it does not.

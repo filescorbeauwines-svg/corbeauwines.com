@@ -1,6 +1,6 @@
 ---
+clave: reino-unido
 slug: malbec-a-12-grados
-par: malbec-at-12-abv
 volanta: Mercado británico
 titulo: Malbec a 12 grados: cuarenta y seis peniques por litro
 bajada: Desde febrero de 2025 el Reino Unido cobra el impuesto según el alcohol que el vino tiene de verdad. Esa sola decisión cambió lo que nos piden, y lo que pedimos al viñedo.

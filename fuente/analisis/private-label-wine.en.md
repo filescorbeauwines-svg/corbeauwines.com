@@ -1,6 +1,6 @@
 ---
+clave: marca-privada
 slug: private-label-wine
-par: marca-privada-de-vino
 volanta: Private label
 titulo: Private-label wine: turning a first order into a lasting business
 bajada: An exclusive product can become an asset of your own. Its success depends on how the buyer and winery develop the programme together, and the work starts before the first container.
