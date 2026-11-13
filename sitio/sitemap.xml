@@ -257,6 +257,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/consistency-across-vintages/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/continuidad-entre-cosechas/"/>
   </url>
+  <url><loc>https://corbeauwines.com/pt/analises/custo-de-mudar-de-origem/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/the-cost-of-switching-origin/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/costo-de-cambiar-de-origen/"/>
+  </url>
   <url><loc>https://corbeauwines.com/pt/analises/malbec-a-12-graus/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/malbec-at-12-abv/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/malbec-a-12-grados/"/>
@@ -268,6 +272,14 @@
   <url><loc>https://corbeauwines.com/pt/analises/marca-propria-de-vinho/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/private-label-wine/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/marca-privada-de-vino/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/pt/analises/o-que-exige-um-programa-de-malbec/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/what-a-bulk-malbec-programme-requires/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/que-exige-un-programa-de-malbec/"/>
+  </url>
+  <url><loc>https://corbeauwines.com/pt/analises/preco-fixado-entregas-futuras/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/fixed-price-future-deliveries/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corbeauwines.com/es/analisis/precio-fijado-entregas-futuras/"/>
   </url>
   <url><loc>https://corbeauwines.com/pt/analises/quanto-custa-um-malbec-a-granel/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://corbeauwines.com/en/insights/what-does-bulk-malbec-cost/"/>
