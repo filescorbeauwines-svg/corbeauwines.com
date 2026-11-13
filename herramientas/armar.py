@@ -233,7 +233,10 @@ def sitemap():
             s = open(os.path.join(raiz, 'index.html'), encoding='utf-8').read()
             canon = re.search(r'<link rel="canonical" href="([^"]+)"', s).group(1)
             E.append('  <url><loc>%s</loc>' % canon)
-            for hl, href in re.findall(r'<link rel="alternate" hreflang="([a-z-]+)" href="([^"]+)"', s):
+            # «pt-BR» lleva mayúsculas: el patrón tiene que admitirlas, si no
+            # el portugués se cae del sitemap sin avisar
+            for hl, href in re.findall(
+                    r'<link rel="alternate" hreflang="([a-zA-Z-]+)" href="([^"]+)"', s):
                 if hl != 'x-default':
                     E.append('    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>' % (hl, href))
             E.append('  </url>')
